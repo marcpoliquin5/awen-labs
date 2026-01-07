@@ -110,11 +110,26 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Video background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        style={{ opacity: 0.7 }}
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-background/60 pointer-events-none" />
+
       {/* Animated background canvas */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 pointer-events-none"
-        style={{ opacity: 0.6 }}
+        style={{ opacity: 0.4 }}
       />
 
       {/* Gradient overlays */}
