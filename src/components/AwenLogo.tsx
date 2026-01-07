@@ -20,7 +20,7 @@ const AwenLogo = ({ className = "w-10 h-10" }: AwenLogoProps) => {
           <stop offset="100%" stopColor="hsl(187, 94%, 48%)" />
         </linearGradient>
         <filter id="glow">
-          <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+          <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
           <feMerge>
             <feMergeNode in="coloredBlur" />
             <feMergeNode in="SourceGraphic" />
@@ -28,60 +28,83 @@ const AwenLogo = ({ className = "w-10 h-10" }: AwenLogoProps) => {
         </filter>
       </defs>
       
-      {/* Abstract triskelion-inspired wave symbol */}
       <g filter="url(#glow)">
-        {/* Center circle */}
-        <circle
-          cx="50"
-          cy="50"
-          r="8"
-          fill="url(#awenGradient)"
-        />
-        
-        {/* Three flowing waves emanating from center */}
-        <motion.path
-          d="M50 42 Q65 30, 75 35 Q85 40, 80 55"
-          stroke="url(#awenGradient)"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 1.5, delay: 0.2 }}
-        />
-        <motion.path
-          d="M44 54 Q30 55, 25 70 Q22 82, 35 85"
-          stroke="url(#awenGradient)"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 1.5, delay: 0.4 }}
-        />
-        <motion.path
-          d="M56 54 Q60 70, 50 80 Q40 90, 25 82"
-          stroke="url(#awenGradient)"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 1.5, delay: 0.6 }}
-        />
-        
         {/* Outer ring */}
         <motion.circle
           cx="50"
           cy="50"
-          r="42"
+          r="44"
           stroke="url(#awenGradient)"
-          strokeWidth="1.5"
+          strokeWidth="2.5"
           fill="none"
-          opacity="0.4"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2, delay: 0.8 }}
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+        />
+        
+        {/* Three dots at the top */}
+        <motion.circle
+          cx="50"
+          cy="14"
+          r="4"
+          fill="url(#awenGradient)"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+        />
+        <motion.circle
+          cx="32"
+          cy="22"
+          r="4"
+          fill="url(#awenGradient)"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
+        />
+        <motion.circle
+          cx="68"
+          cy="22"
+          r="4"
+          fill="url(#awenGradient)"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.7 }}
+        />
+        
+        {/* Left flowing line */}
+        <motion.path
+          d="M32 26 Q28 40, 32 55 Q36 70, 30 82"
+          stroke="url(#awenGradient)"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+        />
+        
+        {/* Center flowing line */}
+        <motion.path
+          d="M50 18 Q46 35, 50 50 Q54 65, 50 82"
+          stroke="url(#awenGradient)"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+        />
+        
+        {/* Right flowing line */}
+        <motion.path
+          d="M68 26 Q72 40, 68 55 Q64 70, 70 82"
+          stroke="url(#awenGradient)"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
         />
       </g>
     </motion.svg>
