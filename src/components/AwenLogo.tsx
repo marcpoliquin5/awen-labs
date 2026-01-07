@@ -20,7 +20,7 @@ const AwenLogo = ({ className = "w-10 h-10" }: AwenLogoProps) => {
           <stop offset="100%" stopColor="hsl(187, 94%, 48%)" />
         </linearGradient>
         <filter id="glow">
-          <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+          <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
           <feMerge>
             <feMergeNode in="coloredBlur" />
             <feMergeNode in="SourceGraphic" />
@@ -28,34 +28,64 @@ const AwenLogo = ({ className = "w-10 h-10" }: AwenLogoProps) => {
         </filter>
       </defs>
       
-      {/* Abstract triskelion-inspired wave symbol */}
       <g filter="url(#glow)">
-        {/* Center circle */}
+        {/* Outer ring */}
         <motion.circle
           cx="50"
           cy="50"
-          r="8"
+          r="44"
+          stroke="url(#awenGradient)"
+          strokeWidth="2.5"
+          fill="none"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        />
+        
+        {/* Three dots at the top - arranged in arc */}
+        <motion.circle
+          cx="50"
+          cy="16"
+          r="5"
           fill="url(#awenGradient)"
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+        />
+        <motion.circle
+          cx="30"
+          cy="24"
+          r="5"
+          fill="url(#awenGradient)"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
+        />
+        <motion.circle
+          cx="70"
+          cy="24"
+          r="5"
+          fill="url(#awenGradient)"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
         />
         
-        {/* Three flowing waves emanating from center */}
+        {/* Three flowing lines going down */}
         <motion.path
-          d="M50 42 Q65 30, 75 35 Q85 40, 80 55"
+          d="M30 32 Q26 50, 32 65 Q38 78, 30 88"
           stroke="url(#awenGradient)"
-          strokeWidth="3"
+          strokeWidth="3.5"
           fill="none"
           strokeLinecap="round"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         />
         <motion.path
-          d="M44 54 Q30 55, 25 70 Q22 82, 35 85"
+          d="M50 22 Q44 45, 50 60 Q56 75, 50 88"
           stroke="url(#awenGradient)"
-          strokeWidth="3"
+          strokeWidth="3.5"
           fill="none"
           strokeLinecap="round"
           initial={{ pathLength: 0, opacity: 0 }}
@@ -63,28 +93,14 @@ const AwenLogo = ({ className = "w-10 h-10" }: AwenLogoProps) => {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
         />
         <motion.path
-          d="M56 54 Q60 70, 50 80 Q40 90, 25 82"
+          d="M70 32 Q74 50, 68 65 Q62 78, 70 88"
           stroke="url(#awenGradient)"
-          strokeWidth="3"
+          strokeWidth="3.5"
           fill="none"
           strokeLinecap="round"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-        />
-        
-        {/* Outer ring */}
-        <motion.circle
-          cx="50"
-          cy="50"
-          r="42"
-          stroke="url(#awenGradient)"
-          strokeWidth="1.5"
-          fill="none"
-          opacity="0.4"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.4 }}
-          transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
         />
       </g>
     </motion.svg>
