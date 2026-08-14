@@ -1,0 +1,51 @@
+name: Security and build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  security-and-build:
+    name: Security and build
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout complete history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Scan complete history for secrets
+        uses: gitleaks/gitleaks-action@dcedce43c6f43de0b836d1fe38946645c9c638dc
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Check repository security policy
+        run: npm run check:security
+
+      - name: Audit dependency vulnerabilities
+        run: npm audit --audit-level=moderate
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build from documented variables
+        env:
+          VITE_SUPABASE_PROJECT_ID: local-build
+          VITE_SUPABASE_PUBLISHABLE_KEY: local-browser-key
+          VITE_SUPABASE_URL: https://example.invalid
+        run: npm run build

@@ -1,73 +1,60 @@
-# Welcome to your Lovable project
+# AWEN Labs site
 
-## Project info
+This repository contains the Vite, React, and TypeScript source for the AWEN Labs
+site.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Local setup
 
-## How can I edit this code?
+Install a supported Node.js release and copy the value-free configuration
+contract:
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```powershell
+Copy-Item .env.example .env.local
+npm ci
+npm run check:security
+npm run lint
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Populate `.env.local` with:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- `VITE_SUPABASE_PROJECT_ID`: the public project identifier;
+- `VITE_SUPABASE_URL`: the public project API URL; and
+- `VITE_SUPABASE_PUBLISHABLE_KEY`: a browser-safe publishable or legacy anon key.
 
-**Use GitHub Codespaces**
+Every `VITE_` value is embedded in the browser bundle. Never place a service-role
+key, database password, JWT signing secret, management access token, or other
+privileged value in any `VITE_` variable, local file intended for commit, GitHub
+variable, build log, or artifact.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+The production build uses the same variables:
 
-## What technologies are used for this project?
+```powershell
+npm run build
+```
 
-This project is built with:
+## Supabase security boundary
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The browser key identifies a project; it does not authorize trusted operations.
+Database authorization must be enforced with Row Level Security and explicit
+anonymous/authenticated policies. Key reissue and RLS review are independent
+operations.
 
-## How can I deploy this project?
+The generated database types currently expose no public tables, views, or
+functions, and the application makes no database, authentication, storage, or RPC
+calls. If a public table is added, the repository security check requires
+versioned migrations that enable RLS and create explicit policies before CI can
+pass. Policy tests should exercise anonymous and authenticated roles before the
+new data access is deployed.
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+The initial repository import contained one legacy Supabase anon JWT in `.env`.
+It was classified as the `anon` role, not a service-role credential. The current
+tree no longer contains the value. Its exact historical Gitleaks fingerprint is
+documented in `.gitleaksignore` so the known browser-safe finding does not mask
+any new JWT or privileged-secret finding.
 
-## Can I connect a custom domain to my Lovable project?
+## Automated checks
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Pull requests and `main` run a complete-history Gitleaks scan, repository security
+policy, ESLint, and a production build using non-secret CI fixtures. GitHub secret
+scanning and push protection are also enabled at repository level.

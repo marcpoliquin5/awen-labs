@@ -1,0 +1,3 @@
+# Historical browser-safe Supabase anon JWT from the initial import. The value is
+# public by design, is not privileged, and is removed from the current tree.
+4357fe5974d74ac09cf4af69b7c227b53004abdb:.env:jwt:2
