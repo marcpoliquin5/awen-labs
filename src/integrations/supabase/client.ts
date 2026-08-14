@@ -11,6 +11,12 @@ if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
   );
 }
 
+if (!SUPABASE_PUBLISHABLE_KEY.startsWith('sb_publishable_')) {
+  throw new Error(
+    'VITE_SUPABASE_PUBLISHABLE_KEY must use a modern sb_publishable_ key; legacy anon JWT keys are not accepted.',
+  );
+}
+
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 

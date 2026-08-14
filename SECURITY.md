@@ -18,7 +18,14 @@ credential.
 - Because no privileged material was found, Git history was not rewritten. The
   public anon finding is narrowly ignored by its immutable Gitleaks fingerprint.
 
-Reissue or revoke browser keys from the Supabase project settings. Rotating a
-browser key never replaces RLS validation. A maintainer with project-owner access
-must confirm the deployed key and hosted policy state whenever the application
-begins accessing data.
+The historical browser key's project, `nbwkthmgoubsflezymua`, is no longer in
+the connected account and its API hostname does not resolve. Runtime
+configuration now targets replacement project `rzgqmmjvjmsfyetgzjvi` and the
+client rejects legacy anon JWT keys in favor of a modern `sb_publishable_` key.
+
+The replacement project's hosted state was inspected with project-owner access.
+It has an empty public schema and no storage buckets or Edge Functions. Migration
+`20260814030824_secure_rls_event_trigger.sql` moved the automatic RLS event
+trigger function to a private schema and removed all API-role execution rights;
+the enabled event trigger remains in place. Supabase's security and performance
+advisors report no findings after that migration.
