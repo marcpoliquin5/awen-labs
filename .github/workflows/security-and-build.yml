@@ -46,6 +46,6 @@ jobs:
       - name: Build from documented variables
         env:
           VITE_SUPABASE_PROJECT_ID: local-build
-          VITE_SUPABASE_PUBLISHABLE_KEY: local-browser-key
+          VITE_SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_fixture_00000000
           VITE_SUPABASE_URL: https://example.invalid
         run: npm run build

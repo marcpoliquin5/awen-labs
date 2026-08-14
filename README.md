@@ -18,9 +18,10 @@ npm run dev
 
 Populate `.env.local` with:
 
-- `VITE_SUPABASE_PROJECT_ID`: the public project identifier;
-- `VITE_SUPABASE_URL`: the public project API URL; and
-- `VITE_SUPABASE_PUBLISHABLE_KEY`: a browser-safe publishable or legacy anon key.
+- `VITE_SUPABASE_PROJECT_ID`: `rzgqmmjvjmsfyetgzjvi`;
+- `VITE_SUPABASE_URL`: `https://rzgqmmjvjmsfyetgzjvi.supabase.co`; and
+- `VITE_SUPABASE_PUBLISHABLE_KEY`: an active modern `sb_publishable_` key from
+  that project.
 
 Every `VITE_` value is embedded in the browser bundle. Never place a service-role
 key, database password, JWT signing secret, management access token, or other
@@ -47,11 +48,25 @@ versioned migrations that enable RLS and create explicit policies before CI can
 pass. Policy tests should exercise anonymous and authenticated roles before the
 new data access is deployed.
 
+The connected hosted project currently contains no public tables, views,
+functions, storage buckets, Edge Functions, or development branches. The
+versioned `20260814030824_secure_rls_event_trigger.sql` migration preserves the
+automatic RLS event trigger while moving its `SECURITY DEFINER` function out of
+the exposed API schema and revoking execution from `PUBLIC`, `anon`,
+`authenticated`, and `service_role`. Supabase's security and performance
+advisors report no remaining findings.
+
 The initial repository import contained one legacy Supabase anon JWT in `.env`.
 It was classified as the `anon` role, not a service-role credential. The current
 tree no longer contains the value. Its exact historical Gitleaks fingerprint is
 documented in `.gitleaksignore` so the known browser-safe finding does not mask
 any new JWT or privileged-secret finding.
+
+That historical key belonged to project `nbwkthmgoubsflezymua`. The connected
+account has no permission to that project and its API hostname no longer
+resolves, so the old key and endpoint are decommissioned. The replacement
+project is `rzgqmmjvjmsfyetgzjvi`; this application rejects legacy JWT API keys
+and accepts only its independently managed modern publishable key.
 
 ## Automated checks
 

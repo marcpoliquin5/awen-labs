@@ -40,6 +40,33 @@ for (const privilegedName of ['SERVICE_ROLE', 'DATABASE_PASSWORD', 'JWT_SECRET']
     errors.push(`browser client references privileged variable ${privilegedName}`);
   }
 }
+if (!client.includes("startsWith('sb_publishable_')")) {
+  errors.push('browser client must reject legacy anon JWT keys');
+}
+
+const supabaseConfig = readFileSync('supabase/config.toml', 'utf8');
+if (!supabaseConfig.includes('project_id = "rzgqmmjvjmsfyetgzjvi"')) {
+  errors.push('Supabase configuration must target the connected replacement project');
+}
+
+const hostedSecurityMigration =
+  'supabase/migrations/20260814030824_secure_rls_event_trigger.sql';
+if (!existsSync(hostedSecurityMigration)) {
+  errors.push('the hosted RLS event-trigger hardening migration must be versioned');
+} else {
+  const migration = readFileSync(hostedSecurityMigration, 'utf8');
+  for (const required of [
+    /alter\s+function\s+public\.rls_auto_enable\(\)\s+set\s+schema\s+private/i,
+    /revoke\s+all\s+on\s+function\s+private\.rls_auto_enable\(\)\s+from\s+public/i,
+    /revoke\s+all\s+on\s+function\s+private\.rls_auto_enable\(\)\s+from\s+anon/i,
+    /revoke\s+all\s+on\s+function\s+private\.rls_auto_enable\(\)\s+from\s+authenticated/i,
+  ]) {
+    if (!required.test(migration)) {
+      errors.push('hosted RLS event-trigger migration is missing required hardening');
+      break;
+    }
+  }
+}
 
 const databaseTypes = readFileSync('src/integrations/supabase/types.ts', 'utf8');
 const emptyPublicSchema = /Tables:\s*{\s*\[_ in never\]: never\s*}/m.test(databaseTypes);
