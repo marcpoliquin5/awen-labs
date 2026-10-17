@@ -1,7 +1,55 @@
-# AWEN Labs site
+<div align="center">
 
-This repository contains the Vite, React, and TypeScript source for the AWEN Labs
-site.
+# AWEN Labs
+
+**The web front end for AWEN, an open, experimental software stack for computing with light.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+</div>
+
+AWEN Labs is the public-facing web experience for the AWEN photonic computing
+platform. It presents the platform stack, documentation entry points, research
+areas, downloads, and community channels in a single responsive site built with
+Vite, React, TypeScript, Tailwind CSS, and shadcn/ui components.
+
+## Where this fits
+
+AWEN is organized as three repositories:
+
+```mermaid
+flowchart LR
+    core["<b>awen</b><br/>compiler, runtime, MLIR dialects,<br/>simulator, specifications"]
+    labs["<b>awen-labs</b> (this repo)<br/>interactive platform site<br/>React + TypeScript"]
+    status["<b>awenphotonics.github.io</b><br/>static, evidence-checked<br/>status and research site"]
+    core -- capabilities and docs --> labs
+    core -- verified status --> status
+```
+
+| Repository | Role |
+|---|---|
+| [awen](https://github.com/marcpoliquin5/awen) | The technology: an experimental heterogeneous compiler and runtime for programmable photonic linear algebra (Rust, MLIR, Python) |
+| **awen-labs** | This repository: the interactive platform site (pages for Platform, Research, Docs, Downloads, Community, About) |
+| [awenphotonics.github.io](https://github.com/marcpoliquin5/awenphotonics.github.io) | A static status site whose public copy is limited to repository-verifiable statements ([live site](https://marcpoliquin5.github.io/awenphotonics.github.io/)) |
+
+> **Content status.** Some page copy in this site (for example research
+> summaries, benchmark figures, and download descriptions) is presentational and
+> has not been reconciled with AWEN's evidence policy. The authoritative statement
+> of what AWEN implements today is the core repository's
+> [implementation status](https://github.com/marcpoliquin5/awen/blob/main/docs/IMPLEMENTATION-STATUS.md).
+
+## Project structure
+
+```text
+src/
+├── pages/         Route-level pages (Index, Platform, Research, Docs, Downloads, Community, About)
+├── components/    Shared layout and UI components (shadcn/ui based)
+├── hooks/         React hooks
+├── integrations/  Supabase client and generated types
+└── lib/           Utilities
+supabase/          Versioned migrations and project configuration
+scripts/           Repository security-policy check
+```
 
 ## Local setup
 
