@@ -1,28 +1,24 @@
 import { motion } from "framer-motion";
 import { Github, MessageCircle, Mail, Users, Heart } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const communityLinks = [
   {
     icon: Github,
-    title: "GitHub",
-    description: "Browse source, report issues, submit PRs",
-    href: "https://github.com/marcpoliquin5/awen",
-    action: "View Repository",
+    title: "Open Source",
+    description: "Source code will be published alongside the first release",
+    action: "Coming soon",
   },
   {
     icon: MessageCircle,
     title: "Issues & Discussion",
-    description: "Ask questions, propose ideas, and report bugs",
-    href: "https://github.com/marcpoliquin5/awen/issues",
-    action: "Open Issues",
+    description: "A public place to ask questions, propose ideas, and report bugs",
+    action: "Coming soon",
   },
   {
     icon: Mail,
     title: "Release Updates",
-    description: "Watch the repository to follow releases",
-    href: "https://github.com/marcpoliquin5/awen/releases",
-    action: "Watch Releases",
+    description: "Get notified when the first release ships",
+    action: "Coming soon",
   },
 ];
 
@@ -50,11 +46,8 @@ const CommunitySection = () => {
           {communityLinks.map((link, index) => {
             const Icon = link.icon;
             return (
-              <motion.a
+              <motion.div
                 key={link.title}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -71,9 +64,9 @@ const CommunitySection = () => {
                   {link.description}
                 </p>
                 <span className="text-primary text-sm font-medium">
-                  {link.action} →
+                  {link.action}
                 </span>
-              </motion.a>
+              </motion.div>
             );
           })}
         </div>
@@ -98,12 +91,10 @@ const CommunitySection = () => {
             interested in photonic computing. Whether you want to contribute code,
             share research, or help with documentation—there's a place for you.
           </p>
-          <a href="https://github.com/marcpoliquin5/awen/issues" target="_blank" rel="noopener noreferrer">
-            <Button variant="glow" size="lg">
-              <Mail className="mr-2 w-5 h-5" />
-              Get in Touch
-            </Button>
-          </a>
+          <span className="inline-flex items-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-5 py-2.5 text-sm font-medium text-primary">
+            <Mail className="w-4 h-4" />
+            Contact channels coming soon
+          </span>
         </motion.div>
       </div>
     </section>
