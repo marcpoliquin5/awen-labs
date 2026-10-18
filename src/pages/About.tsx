@@ -35,7 +35,8 @@ const AboutPage = () => {
                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                 className="lg:sticky lg:top-32"
               >
-                <div className="relative mx-auto w-fit">
+                {/* With the 3D scene running, the glowing mascot in the background takes this spot. */}
+                <div className="about-hero-logo relative mx-auto w-fit transition-opacity duration-1000">
                   <div className="absolute -inset-10 rounded-full bg-[radial-gradient(circle,hsl(43_74%_55%/0.35),transparent_65%)] blur-2xl animate-pulse" aria-hidden="true" />
                   <BrandLogo size={160} className="relative" />
                 </div>
@@ -100,11 +101,11 @@ const AboutPage = () => {
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                     {[
-                      { name: "Obsidian", color: "bg-background", hex: "#090807" },
-                      { name: "Graphite", color: "bg-card", hex: "#0E0D0B" },
-                      { name: "Gold", color: "bg-primary", hex: "#E1B137" },
-                      { name: "Photon Blue", color: "bg-accent", hex: "#3F9FF3" },
-                      { name: "Ivory", color: "bg-foreground", hex: "#F6F4EE" },
+                      { name: "Abyss", color: "bg-background", hex: "#06172B" },
+                      { name: "Treasure Gold", color: "bg-primary", hex: "#E1B137" },
+                      { name: "Seafoam", color: "bg-accent", hex: "#5CE0CD" },
+                      { name: "Deco Pink", color: "bg-[hsl(var(--deco-pink))]", hex: "#FFB3C7" },
+                      { name: "Butter", color: "bg-[hsl(var(--deco-butter))]", hex: "#FFE08A" },
                     ].map((c) => (
                       <div key={c.name} className="text-center">
                         <div

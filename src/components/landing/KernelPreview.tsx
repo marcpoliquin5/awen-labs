@@ -29,7 +29,7 @@ export default function KernelPreview() {
           analog error within explicit budgets.
         </SectionHeading>
         <Reveal delay={0.1}>
-          <div className="lift relative rounded-2xl border border-border/60 bg-[hsl(40_12%_4%)] shadow-[0_30px_80px_-20px_hsl(43_74%_55%/0.25)] overflow-hidden">
+          <div className="lift relative rounded-2xl border border-border/60 bg-[hsl(212_70%_7%/0.88)] backdrop-blur-xl shadow-[0_30px_80px_-20px_hsl(43_74%_55%/0.25)] overflow-hidden">
             <div className="flex items-center gap-2 border-b border-border/50 px-4 py-3">
               <span className="h-2.5 w-2.5 rounded-full bg-border" />
               <span className="h-2.5 w-2.5 rounded-full bg-border" />

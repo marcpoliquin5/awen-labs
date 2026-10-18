@@ -19,7 +19,7 @@ const columns = {
 
 const Footer = () => (
   <footer className="relative border-t border-border/40">
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] max-w-full h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
+    <div className="deco-stripe absolute top-0 inset-x-0" aria-hidden="true" />
     <div className="container mx-auto px-6 py-16">
       <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr]">
         <div>

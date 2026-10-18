@@ -178,7 +178,8 @@
 
 @utility glass-card {
   /* Glassmorphism Card */
-  @apply bg-card/40 backdrop-blur-xl border border-border/50 rounded-xl;
+  @apply bg-card/45 backdrop-blur-xl border border-border/50 rounded-xl;
+  background-image: linear-gradient(160deg, hsl(190 80% 80% / 0.07), transparent 40%);
   box-shadow: var(--shadow-card);
 }
 
@@ -225,7 +226,7 @@
       ),
       radial-gradient(
         ellipse 50% 50% at 80% 60%,
-        hsl(208 88% 60% / 0.03) 0%,
+        hsl(172 70% 62% / 0.03) 0%,
         transparent 70%
       );
   }
@@ -233,65 +234,70 @@
 
 @layer base {
   :root {
-    /* AWEN color system: deep black, metallic gold, photonic blue */
-    --background: 40 12% 3%;
-    --foreground: 45 30% 95%;
+    /* AWEN undersea system: deep ocean blue, treasure gold, seafoam, and pastel deco accents */
+    --background: 212 72% 8%;
+    --foreground: 195 40% 96%;
 
-    --card: 40 10% 5%;
-    --card-foreground: 45 30% 95%;
+    --card: 210 65% 13%;
+    --card-foreground: 195 40% 96%;
 
-    --popover: 40 10% 5%;
-    --popover-foreground: 45 30% 95%;
+    --popover: 211 65% 11%;
+    --popover-foreground: 195 40% 96%;
 
     --primary: 43 74% 55%;
     --primary-foreground: 35 40% 6%;
 
-    --secondary: 40 10% 11%;
-    --secondary-foreground: 45 30% 95%;
+    --secondary: 208 50% 18%;
+    --secondary-foreground: 195 40% 96%;
 
-    --muted: 40 8% 10%;
-    --muted-foreground: 40 8% 62%;
+    --muted: 208 45% 16%;
+    --muted-foreground: 200 28% 74%;
 
-    --accent: 208 88% 60%;
-    --accent-foreground: 215 40% 6%;
+    --accent: 172 70% 62%;
+    --accent-foreground: 212 72% 8%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 40 12% 15%;
-    --input: 40 12% 15%;
+    --border: 200 45% 30%;
+    --input: 200 45% 30%;
     --ring: 43 74% 55%;
 
     --radius: 0.75rem;
 
+    /* Pastel art-deco accents */
+    --deco-pink: 345 100% 85%;
+    --deco-butter: 45 100% 77%;
+    --deco-seafoam: 164 64% 74%;
+
     /* AWEN Custom Tokens */
-    --awen-midnight: 40 12% 3%;
-    --awen-abyss: 40 10% 5%;
+    --awen-midnight: 212 72% 8%;
+    --awen-abyss: 210 65% 13%;
     --awen-electric: 43 74% 55%;
-    --awen-cyan: 208 88% 60%;
+    --awen-cyan: 172 70% 62%;
     --awen-glow: 45 85% 66%;
-    --awen-nebula: 35 20% 7%;
+    --awen-nebula: 205 60% 16%;
 
     /* Gradients */
-    --gradient-space: linear-gradient(180deg, hsl(40 12% 3%) 0%, hsl(35 20% 6%) 50%, hsl(40 10% 5%) 100%);
-    --gradient-glow: linear-gradient(135deg, hsl(43 74% 55% / 0.3) 0%, hsl(208 88% 60% / 0.1) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(40 10% 11% / 0.5) 0%, hsl(40 10% 8% / 0.3) 100%);
-    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(43 74% 55% / 0.15) 0%, transparent 70%);
+    --gradient-space: linear-gradient(180deg, hsl(200 70% 22%) 0%, hsl(208 72% 13%) 35%, hsl(214 78% 6%) 100%);
+    --gradient-glow: linear-gradient(135deg, hsl(43 74% 55% / 0.3) 0%, hsl(172 70% 62% / 0.12) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(205 60% 20% / 0.5) 0%, hsl(212 65% 12% / 0.35) 100%);
+    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(190 80% 60% / 0.15) 0%, transparent 70%);
 
     /* Shadows */
     --shadow-glow: 0 0 60px hsl(43 74% 55% / 0.3);
     --shadow-glow-sm: 0 0 20px hsl(43 74% 55% / 0.2);
-    --shadow-glow-cyan: 0 0 40px hsl(208 88% 60% / 0.2);
-    --shadow-card: 0 4px 24px hsl(40 12% 2% / 0.8);
+    --shadow-glow-cyan: 0 0 40px hsl(172 70% 62% / 0.25);
+    --shadow-card: 0 8px 32px hsl(214 80% 4% / 0.55), inset 0 1px 0 hsl(190 80% 85% / 0.08);
 
     /* Sidebar (keeping for shadcn compatibility) */
-    --sidebar-background: 40 12% 4%;
-    --sidebar-foreground: 45 30% 95%;
+    --sidebar-background: 212 72% 9%;
+    --sidebar-foreground: 195 40% 96%;
     --sidebar-primary: 43 74% 55%;
     --sidebar-primary-foreground: 35 40% 6%;
-    --sidebar-accent: 40 10% 11%;
-    --sidebar-accent-foreground: 45 30% 95%;
-    --sidebar-border: 40 12% 15%;
+    --sidebar-accent: 208 50% 18%;
+    --sidebar-accent-foreground: 195 40% 96%;
+    --sidebar-border: 200 45% 30%;
     --sidebar-ring: 43 74% 55%;
   }
 }
@@ -410,21 +416,44 @@ html {
   }
 }
 
-/* Animated SVG backdrops (mobile, reduced motion, loading) */
-@keyframes mb-dash { from { stroke-dashoffset: 1800; } to { stroke-dashoffset: 0; } }
-.mb-dash { stroke-dasharray: 60 1740; animation: mb-dash 5s linear infinite; }
-@keyframes mb-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
-.mb-float { animation: mb-float 5s ease-in-out infinite; }
-@keyframes mb-pulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
-.mb-pulse { animation: mb-pulse 2.4s ease-in-out infinite; }
-@keyframes mb-travel { from { offset-distance: 0%; } to { offset-distance: 100%; } }
-.mb-travel { animation: mb-travel 6s linear infinite; }
-@keyframes mb-ripple { from { transform: scale(0.05); opacity: 0.8; } to { transform: scale(1); opacity: 0; } }
-.mb-ripple { transform-box: view-box; animation: mb-ripple 4.8s linear infinite; }
-@keyframes mb-stream { from { stroke-dashoffset: 900; } to { stroke-dashoffset: 0; } }
-.mb-stream { stroke-dasharray: 40 260; animation: mb-stream 4s linear infinite; }
-@keyframes mb-spin { to { transform: rotate(360deg); } }
-.mb-spin { animation: mb-spin 20s linear infinite; }
+/* Undersea CSS backdrop (phones, reduced motion, and while WebGL loads) */
+.ocean-backdrop {
+  background: radial-gradient(ellipse 70% 40% at 60% -5%, hsl(188 80% 70% / 0.45), transparent 70%),
+    linear-gradient(180deg, hsl(200 72% 28%) 0%, hsl(206 74% 17%) 40%, hsl(213 80% 8%) 100%);
+}
+@keyframes ocean-caustics { from { background-position: 0 0, 0 0; } to { background-position: 240px 120px, -200px 160px; } }
+.ocean-caustics {
+  background-image: repeating-radial-gradient(circle at 30% 20%, hsl(190 90% 85% / 0.10) 0 2px, transparent 3px 26px),
+    repeating-radial-gradient(circle at 70% 10%, hsl(170 90% 85% / 0.08) 0 2px, transparent 3px 34px);
+  mask-image: linear-gradient(180deg, #000, transparent);
+  animation: ocean-caustics 18s linear infinite alternate;
+}
+@keyframes ocean-ray { 0%, 100% { opacity: 0.25; transform: rotate(12deg) translateX(0); } 50% { opacity: 0.6; transform: rotate(14deg) translateX(18px); } }
+.ocean-ray {
+  background: linear-gradient(180deg, hsl(190 90% 85% / 0.28), transparent);
+  filter: blur(8px);
+  transform-origin: top center;
+  animation: ocean-ray 9s ease-in-out infinite;
+}
+@keyframes ocean-neon { 0%, 100% { opacity: 0.65; } 50% { opacity: 1; } }
+.ocean-neon { animation: ocean-neon 2.6s ease-in-out infinite; filter: drop-shadow(0 0 4px currentColor); }
+@keyframes ocean-kelp { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(5deg); } }
+.ocean-kelp { animation: ocean-kelp 5s ease-in-out infinite; transform-box: view-box; }
+@keyframes ocean-plate { 0%, 100% { transform: rotateX(62deg) rotateZ(0deg) translateZ(0); } 50% { transform: rotateX(62deg) rotateZ(25deg) translateZ(14px); } }
+.ocean-plate {
+  background: linear-gradient(135deg, hsl(345 100% 85% / 0.25), hsl(45 100% 77% / 0.15), hsl(164 64% 74% / 0.25));
+  animation: ocean-plate 7s ease-in-out infinite;
+}
+@keyframes ocean-trail { from { transform: translate(0, 0); opacity: 0; } 10% { opacity: 0.9; } to { transform: translate(-30vw, -110vh); opacity: 0; } }
+.ocean-trail { animation: ocean-trail 8s linear infinite; background: radial-gradient(circle at 35% 30%, #fff9, transparent 60%); }
+@keyframes ocean-ring { from { transform: translate(-50%, -50%) scale(0.05); opacity: 0.8; } to { transform: translate(-50%, -50%) scale(1); opacity: 0; } }
+.ocean-ring { border: 2px solid hsl(164 64% 74% / 0.5); box-shadow: 0 0 20px hsl(345 100% 85% / 0.3); animation: ocean-ring 4.8s linear infinite; }
+@keyframes ocean-glyph { from { transform: translateY(105vh); opacity: 0; } 10%, 85% { opacity: 1; } to { transform: translateY(-10vh); opacity: 0; } }
+.ocean-glyph { top: 0; animation: ocean-glyph 8s linear infinite; background: radial-gradient(circle at 35% 30%, #fff4, transparent 60%); }
+@keyframes ocean-orbit { to { transform: rotate(360deg); } }
+.ocean-orbit { animation: ocean-orbit 10s linear infinite; }
+@keyframes ocean-pulse { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+.ocean-pulse { animation: ocean-pulse 3.5s ease-in-out infinite; }
 @keyframes mb-enter { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: none; } }
 .mb-enter { animation: mb-enter 0.9s ease-out both; transform-origin: center; }
 
@@ -436,15 +465,42 @@ html {
 }
 .lift:hover, .glass-card:hover {
   --ty: -4px;
-  box-shadow: 0 18px 50px -20px hsl(43 74% 55% / 0.45);
+  box-shadow: 0 18px 50px -20px hsl(43 74% 55% / 0.45), 0 0 0 1px hsl(var(--deco-seafoam) / 0.12);
   border-color: hsl(43 74% 55% / 0.45);
 }
 .is-tilting {
   transition: transform 0.12s linear, box-shadow 0.35s, border-color 0.35s;
-  background-image: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), hsl(43 74% 55% / 0.12), hsl(208 88% 60% / 0.05) 35%, transparent 60%);
+  background-image: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), hsl(43 74% 55% / 0.12), hsl(var(--deco-pink) / 0.07) 30%, hsl(var(--deco-seafoam) / 0.05) 45%, transparent 62%);
 }
 .is-dragging-scene, .is-dragging-scene * { user-select: none; cursor: grabbing !important; }
 @keyframes scene-hint { 0% { opacity: 0; transform: translateY(8px); } 10%, 70% { opacity: 1; transform: none; } 100% { opacity: 0.55; } }
 .scene-hint { animation: scene-hint 10s ease-out 1.5s both; }
 @keyframes tap-ripple { from { transform: translate(-50%, -50%) scale(0.1); opacity: 0.9; } to { transform: translate(-50%, -50%) scale(1.6); opacity: 0; } }
-.tap-ripple { animation: tap-ripple 1.1s ease-out forwards; box-shadow: 0 0 30px hsl(208 88% 60% / 0.5), inset 0 0 20px hsl(43 74% 55% / 0.4); }
+.tap-ripple { animation: tap-ripple 1.1s ease-out forwards; box-shadow: 0 0 30px hsl(190 90% 70% / 0.5), inset 0 0 20px hsl(var(--deco-pink) / 0.4); }
+
+/* With the 3D scene running on desktop, the About hero mascot is rendered as treasure in the scene. */
+@media (min-width: 1024px) {
+  .scene-3d .about-hero-logo { opacity: 0; }
+}
+
+/* Art-deco accents: stepped tri-color rule and a small sunburst. */
+.deco-rule {
+  display: inline-flex;
+  gap: 3px;
+  align-items: flex-end;
+}
+.deco-rule > i {
+  display: block;
+  width: 10px;
+  border-radius: 1px;
+}
+.deco-rule > i:nth-child(1) { height: 4px; background: hsl(var(--deco-pink)); }
+.deco-rule > i:nth-child(2) { height: 7px; background: hsl(var(--deco-butter)); }
+.deco-rule > i:nth-child(3) { height: 10px; background: hsl(var(--deco-seafoam)); }
+.deco-stripe {
+  height: 3px;
+  background: linear-gradient(90deg, hsl(var(--deco-pink)) 0 33.3%, hsl(var(--deco-butter)) 33.3% 66.6%, hsl(var(--deco-seafoam)) 66.6% 100%);
+  opacity: 0.7;
+}
+@keyframes sunburst-spin { to { transform: rotate(360deg); } }
+.deco-sunburst { animation: sunburst-spin 24s linear infinite; }

@@ -121,9 +121,9 @@ function orbit(n: number, r: () => number): Formation {
   const rings = 7;
   for (let i = 0; i < n; i++) {
     if (i % 4 === 0) {
-      const u = r() * 2 - 1, a = r() * Math.PI * 2, rad = 1.1 + r() * 0.08;
-      const s = Math.sqrt(1 - u * u);
-      pos.set([rad * s * Math.cos(a), rad * u, rad * s * Math.sin(a)], i * 3);
+      // Glittering halo of tiny bubbles around the treasure.
+      const a = r() * Math.PI * 2, rad = 1.12 + Math.pow(r(), 2) * 0.55;
+      pos.set([rad * Math.cos(a), rad * Math.sin(a), (r() - 0.5) * 0.3], i * 3);
       seed.set([r(), -1, 1, r()], i * 4);
     } else {
       const ring = i % rings;

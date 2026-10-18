@@ -77,7 +77,7 @@ export default function BackgroundStage() {
       {use3D && (
         <div className={`absolute inset-0 transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}>
           <Suspense fallback={null}>
-            <BackgroundCanvas onReady={() => setReady(true)} />
+            <BackgroundCanvas onReady={() => { setReady(true); document.documentElement.classList.add("scene-3d"); }} />
           </Suspense>
         </div>
       )}
@@ -89,11 +89,11 @@ export default function BackgroundStage() {
         />
       ))}
       {/* Vignette keeps foreground text readable over the scene. */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,hsl(40_12%_3%/0.75)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,hsl(214_80%_5%/0.72)_100%)]" />
     </div>
     {ready && (
       <p className="scene-hint pointer-events-none fixed bottom-5 left-5 z-40 hidden lg:flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3.5 py-1.5 font-mono text-[11px] text-muted-foreground backdrop-blur">
-        <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_hsl(208_88%_60%)]" aria-hidden="true" />
+        <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_hsl(172_70%_62%)]" aria-hidden="true" />
         Drag the background to rotate · click a bubble to pop it
         {pops > 0 && <span className="text-primary" data-testid="pop-count">· {pops} popped</span>}
       </p>

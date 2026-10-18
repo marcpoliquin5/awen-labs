@@ -31,7 +31,7 @@ export default function PageHeader({
           transition={{ duration: 0.6, delay: 0.1 }}
           className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-accent"
         >
-          <span className="h-px w-8 bg-accent" />
+          <span className="deco-rule" aria-hidden="true"><i /><i /><i /></span>
           {eyebrow}
         </motion.p>
         <h1 className="mt-6 max-w-4xl text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.04] text-foreground">

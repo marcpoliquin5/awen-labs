@@ -18,7 +18,10 @@ export default function Reveal({ children, delay = 0, className = "" }: { childr
 export function SectionHeading({ eyebrow, title, children }: { eyebrow: string; title: ReactNode; children?: ReactNode }) {
   return (
     <Reveal className="max-w-3xl mb-14">
-      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent mb-4">{eyebrow}</p>
+      <p className="mb-4 inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+        <span className="deco-rule" aria-hidden="true"><i /><i /><i /></span>
+        {eyebrow}
+      </p>
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-foreground leading-[1.1]">{title}</h2>
       {children && <p className="mt-5 text-lg text-muted-foreground leading-relaxed">{children}</p>}
     </Reveal>

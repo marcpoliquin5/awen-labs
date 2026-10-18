@@ -3,22 +3,41 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { AdaptiveDpr, PerformanceMonitor } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
-import { sceneStore, type SceneMode } from "@/lib/sceneStore";
+import { SCENE_MODES, sceneStore, type SceneMode } from "@/lib/sceneStore";
 import { MODE_INDEX, formation } from "./formations";
 import Bubbles from "./Bubbles";
 import { installInteraction, interaction } from "./interaction";
+import { FOG_DENSITY, OCEAN, modeWeights } from "./ocean/palette";
+import { Kelp, LightShafts, Plankton, SeaFloor, WaterColumn } from "./ocean/Environment";
+import DecoCity from "./ocean/DecoCity";
+import { BubbleGlassStack, TreasureMascot } from "./ocean/SceneProps";
 
 const COUNT = 6000;
-const BACKGROUND = new THREE.Color("#090807");
+const GLYPHS = ["λ", "Σ", "∫", "ψ", "⊗", "∇", "π", "φ", "{", "}", "<", ">", "=", "+", "0", "1"];
+
+/** A 4x4 atlas of glyphs carried inside the Docs bubble streams. */
+function glyphAtlas(): THREE.Texture {
+  const c = document.createElement("canvas");
+  c.width = c.height = 256;
+  const g = c.getContext("2d")!;
+  g.fillStyle = "#fff";
+  g.textAlign = "center";
+  g.textBaseline = "middle";
+  g.font = "600 40px 'JetBrains Mono', ui-monospace, monospace";
+  GLYPHS.forEach((ch, i) => g.fillText(ch, (i % 4) * 64 + 32, Math.floor(i / 4) * 64 + 34));
+  const tex = new THREE.CanvasTexture(c);
+  tex.needsUpdate = true;
+  return tex;
+}
 
 // Camera framing per scene: [position, look-at].
 const FRAMING: Record<SceneMode, [THREE.Vector3, THREE.Vector3]> = {
   lattice: [new THREE.Vector3(0, 0, 10.5), new THREE.Vector3(0.6, 0, 0)],
   stack: [new THREE.Vector3(6.5, 4.6, 8.2), new THREE.Vector3(0, 0.2, 0)],
-  timeline: [new THREE.Vector3(1.5, 1.4, 9), new THREE.Vector3(0.8, -0.4, 0)],
+  timeline: [new THREE.Vector3(0.5, 0.2, 12.5), new THREE.Vector3(1.6, 0.6, 0)],
   interference: [new THREE.Vector3(0, 5.2, 8.6), new THREE.Vector3(0, -0.6, 0)],
   streams: [new THREE.Vector3(0, 0, 9.5), new THREE.Vector3(0, 0, 0)],
-  orbit: [new THREE.Vector3(2.5, 1.6, 10), new THREE.Vector3(3.2, -0.3, 0)],
+  orbit: [new THREE.Vector3(3.1, 0.9, 10), new THREE.Vector3(3.1, 0.1, 0)],
 };
 
 const vertexShader = /* glsl */ `
@@ -36,11 +55,20 @@ const vertexShader = /* glsl */ `
   uniform vec4 uShock;
   varying vec3 vColor;
   varying float vAlpha;
+  varying float vGlyph;
 
-  const vec3 GOLD = vec3(0.882, 0.694, 0.216);
-  const vec3 GOLD_HI = vec3(1.0, 0.86, 0.48);
-  const vec3 BLUE = vec3(0.25, 0.62, 0.95);
-  const vec3 BLUE_HI = vec3(0.55, 0.82, 1.0);
+  // Undersea palette: treasure gold, butter, aqua, seafoam, and deco pink.
+  const vec3 GOLD = vec3(0.95, 0.72, 0.28);
+  const vec3 GOLD_HI = vec3(1.0, 0.9, 0.55);
+  const vec3 BLUE = vec3(0.3, 0.82, 1.0);
+  const vec3 BLUE_HI = vec3(0.72, 1.0, 0.94);
+  const vec3 PINK = vec3(1.0, 0.6, 0.78);
+
+  vec3 rise(vec3 q) {
+    // Tilt the roadmap so its bubble trail climbs toward the surface.
+    float c = 0.5, s = 0.866;
+    return vec3(q.x * c - q.y * s + 2.6, q.x * s + q.y * c, q.z);
+  }
 
   // Animates one formation. Returns position; writes brightness and color.
   vec3 animate(float mode, vec3 p, vec4 s, out float b, out vec3 col) {
@@ -49,7 +77,7 @@ const vertexShader = /* glsl */ `
       float pulse = pow(max(0.0, sin(p.x * 1.5 - t * 2.4 + s.y * 1.7)), 10.0);
       float node = s.z;
       b = mix(0.22 + pulse * 1.8, 0.55 + 0.45 * sin(t * 0.9 + s.y * 0.8 + s.w * 6.0), node);
-      col = mix(mix(GOLD, BLUE_HI, pulse), GOLD_HI, node);
+      col = mix(mix(mix(BLUE, PINK, step(0.72, s.w)), GOLD_HI, pulse), GOLD_HI, node);
       return p + vec3(0.0, 0.0, sin(t * 0.6 + p.x * 0.5) * 0.04);
     } else if (mode < 1.5) {               // stack: rotating layered platform
       float layer = s.y;
@@ -65,14 +93,14 @@ const vertexShader = /* glsl */ `
         float k = 0.6 + 0.4 * sin(t * 1.4 + s.y * 2.0);
         b = 0.6 + k * 0.8;
         col = GOLD_HI;
-        return vec3(p.x, p.y + p.x * 0.12, p.z) * (0.9 + 0.15 * k);
+        return rise(vec3(p.x, p.y + p.x * 0.12, p.z) * (0.9 + 0.15 * k));
       }
       float ang = p.y + t * (0.8 + s.x) + p.x * 0.8;
       float rad = p.z * (1.0 + 0.3 * sin(p.x * 0.7 + t));
       float flow = pow(max(0.0, sin(p.x * 0.9 - t * 3.0)), 6.0);
       b = 0.3 + flow * 1.6;
-      col = mix(mix(GOLD, BLUE, s.x), BLUE_HI, flow);
-      return vec3(p.x, p.x * 0.12 + sin(p.x * 0.35 + t * 0.4) * 0.4 + cos(ang) * rad, sin(ang) * rad);
+      col = mix(mix(PINK, BLUE, s.x), BLUE_HI, flow);
+      return rise(vec3(p.x, p.x * 0.12 + sin(p.x * 0.35 + t * 0.4) * 0.4 + cos(ang) * rad, sin(ang) * rad));
     } else if (mode < 3.5) {               // interference: two coherent sources
       vec2 s1 = vec2(-2.2, -1.5), s2 = vec2(2.2, -1.5);
       float r1 = distance(p.xz, s1), r2 = distance(p.xz, s2);
@@ -80,15 +108,17 @@ const vertexShader = /* glsl */ `
       float dp = distance(p.xz, uPointer * vec2(6.0, 4.0));
       h += sin(dp * 4.0 - t * 4.0) * 0.35 / (1.0 + dp * 1.5);
       b = 0.15 + max(0.0, h) * 0.9;
-      col = mix(GOLD, BLUE_HI, smoothstep(-0.6, 1.2, h));
+      // Thin-film colors sweep across the membrane as the waves pass.
+      col = mix(BLUE * 0.6, 0.55 + 0.45 * cos(6.2832 * (h * 0.45 + vec3(0.0, 0.33, 0.67)) + t * 0.15), smoothstep(-0.8, 0.6, h));
       return vec3(p.x, h * 0.45, p.z);
     } else if (mode < 4.5) {               // streams: data flowing down columns
       float speed = 0.6 + s.x * 1.6;
-      float y = mod(p.y - t * speed + 5.0, 10.0) - 5.0;
-      float head = fract((p.y - t * speed) * 0.25 + s.w);
-      b = 0.12 + pow(head, 6.0) * 1.6 + s.z * 0.6;
+      // Bubble streams rise; one in ten carries a glyph.
+      float y = mod(p.y + t * speed + 5.0, 10.0) - 5.0;
+      float head = fract(-(p.y + t * speed) * 0.25 + s.w);
+      b = 0.12 + pow(head, 6.0) * 1.6 + s.z * 0.9;
       col = mix(BLUE, s.z > 0.5 ? GOLD_HI : BLUE_HI, pow(head, 3.0));
-      return vec3(p.x, y, p.z);
+      return vec3(p.x + sin(y * 1.5 + s.w * 6.28 + t) * 0.08, y, p.z);
     }
     // orbit: a gold core with orbiting rings of light
     if (s.z > 0.5) {
@@ -107,6 +137,10 @@ const vertexShader = /* glsl */ `
     return q;
   }
 
+  float glyphOf(float mode, vec4 s) {
+    return (mode > 3.5 && mode < 4.5 && s.z > 0.5) ? floor(s.w * 15.99) : -1.0;
+  }
+
   void main() {
     float bA, bB; vec3 cA, cB;
     vec3 pA = animate(uModeA, aPosA, aSeedA, bA, cA);
@@ -118,6 +152,7 @@ const vertexShader = /* glsl */ `
     p += normalize(p + vec3(0.001)) * burst * (0.6 + aSeedB.x * 1.2);
     float b = mix(bA, bB, m);
     vColor = mix(cA, cB, m);
+    vGlyph = m < 0.5 ? glyphOf(uModeA, aSeedA) : glyphOf(uModeB, aSeedB);
     // Shockwave from a popped bubble.
     float age = uTime - uShock.w;
     if (age < 2.5) {
@@ -138,20 +173,34 @@ const vertexShader = /* glsl */ `
     mv.xy += normalize(away + vec2(0.0001)) * near * 0.06 * -mv.z;
     b += near * 1.2;
     vAlpha = clamp(b, 0.0, 2.2);
-    gl_PointSize = uPixel * (0.9 + b * 1.1) * (26.0 / -mv.z);
+    gl_PointSize = uPixel * (0.9 + b * 1.1) * (26.0 / -mv.z) * (vGlyph >= 0.0 ? 2.6 : 1.0);
     gl_Position = projectionMatrix * mv;
   }
 `;
 
 const fragmentShader = /* glsl */ `
+  uniform sampler2D uGlyphs;
   varying vec3 vColor;
   varying float vAlpha;
+  varying float vGlyph;
   void main() {
-    float d = length(gl_PointCoord - 0.5);
+    vec2 pc = gl_PointCoord;
+    float d = length(pc - 0.5);
+    // Each point is a tiny bubble: a bright rim, a soft core, and a glint.
+    float ring = smoothstep(0.5, 0.42, d) * smoothstep(0.26, 0.42, d);
     float core = smoothstep(0.5, 0.0, d);
-    float a = core * core * vAlpha;
+    float glint = smoothstep(0.13, 0.0, length(pc - vec2(0.36, 0.33)));
+    float a = (ring * 0.8 + core * core * 0.45 + glint * 0.7) * vAlpha;
+    vec3 col = vColor * (0.5 + core * 0.8) + glint * 0.4;
+    if (vGlyph >= 0.0) {
+      vec2 cell = vec2(mod(vGlyph, 4.0), floor(vGlyph / 4.0));
+      vec2 uv = vec2((cell.x + pc.x) / 4.0, 1.0 - (cell.y + pc.y) / 4.0);
+      float g = texture2D(uGlyphs, uv).a;
+      a = (ring * 0.9 + g * 1.1 + glint * 0.5) * clamp(vAlpha, 0.6, 1.4);
+      col = mix(vColor, vec3(1.0, 0.97, 0.88), g);
+    }
     if (a < 0.01) discard;
-    gl_FragColor = vec4(vColor * (0.55 + core * 0.9), a);
+    gl_FragColor = vec4(col, a);
   }
 `;
 
@@ -186,12 +235,13 @@ function Formations() {
         uPixel: { value: gl.getPixelRatio() },
         uPointer: { value: new THREE.Vector2(9, 9) },
         uShock: { value: new THREE.Vector4(0, 0, 0, -100) },
+        uGlyphs: { value: glyphAtlas() },
       },
     });
     return { geometry: g, material: m };
   }, [gl]);
 
-  useEffect(() => () => { geometry.dispose(); material.dispose(); }, [geometry, material]);
+  useEffect(() => () => { geometry.dispose(); material.dispose(); (material.uniforms.uGlyphs.value as THREE.Texture).dispose(); }, [geometry, material]);
 
   // Start a morph whenever the requested scene changes.
   useEffect(
@@ -218,6 +268,8 @@ function Formations() {
     const dt = Math.min(delta, 0.05);
     const st = morph.current;
     st.t = Math.min(1, st.t + dt / 1.6);
+    const kw = 1 - Math.exp(-dt * 2.4);
+    for (const mode of SCENE_MODES) modeWeights[mode] += ((mode === st.b ? 1 : 0) - modeWeights[mode]) * kw;
     const u = material.uniforms;
     u.uTime.value = state.clock.elapsedTime;
     u.uMorph.value = st.t;
@@ -251,6 +303,10 @@ function Formations() {
     v.target.x += px * 0.6;
     v.target.y += py * 0.4 - s * 1.1;
     v.target.z -= Math.min(s, 1) * 1.6;
+    // Cinematic swoop between scenes: rise and pull back mid-transition.
+    const swoop = Math.sin(Math.PI * st.t);
+    v.target.y += swoop * 1.6;
+    v.target.addScaledVector(v.off.normalize(), swoop * 2.4);
     camera.position.lerp(v.target, k);
     lookAt.current.lerp(v.look.set(look.x + px * 0.2, look.y - s * 0.6, look.z), k);
     camera.lookAt(lookAt.current);
@@ -263,8 +319,10 @@ function Formations() {
   return (
     <>
       <group ref={group}>
-        <points geometry={geometry} material={material} frustumCulled={false} />
+        <points geometry={geometry} material={material} frustumCulled={false} renderOrder={1} />
+        <BubbleGlassStack />
       </group>
+      <TreasureMascot />
       <Bubbles onPop={onPop} />
     </>
   );
@@ -293,13 +351,22 @@ export default function BackgroundCanvas({ onReady }: { onReady?: () => void }) 
       gl={{ antialias: false, alpha: false, stencil: false, powerPreference: "high-performance" }}
       onCreated={() => onReady?.()}
     >
-      <color attach="background" args={[BACKGROUND]} />
+      <color attach="background" args={[OCEAN.deep]} />
+      <fogExp2 attach="fog" args={[OCEAN.horizon, FOG_DENSITY]} />
+      <hemisphereLight args={["#ffffff", OCEAN.sand, 1.3]} />
+      <directionalLight position={[6, 20, 8]} intensity={2.2} color="#e6fbff" />
+      <WaterColumn />
+      <LightShafts />
+      <SeaFloor />
+      <Kelp />
+      <DecoCity />
+      <Plankton />
       <PerformanceMonitor onDecline={() => { setDpr(1); setBloom(false); }} onIncline={() => setDpr(1.5)} />
       <AdaptiveDpr pixelated={false} />
       <Formations />
       {bloom && (
         <EffectComposer multisampling={0}>
-          <Bloom mipmapBlur luminanceThreshold={0.2} luminanceSmoothing={0.35} intensity={0.85} radius={0.65} />
+          <Bloom mipmapBlur luminanceThreshold={0.62} luminanceSmoothing={0.3} intensity={0.9} radius={0.7} />
         </EffectComposer>
       )}
     </Canvas>
