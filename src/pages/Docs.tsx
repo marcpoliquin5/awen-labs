@@ -6,13 +6,14 @@ import { Book, Code, Rocket, Search, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { BRAND } from "@/config/brand";
 
 const docsSections = [
   {
     id: "start-here",
     title: "Start Here",
     icon: Rocket,
-    description: "New to AWEN? Begin with these guides.",
+    description: `New to ${BRAND.name}? Begin with these guides.`,
     articles: [
       { title: "Quick Start Guide" },
       { title: "Installation" },
@@ -23,7 +24,7 @@ const docsSections = [
     id: "core-concepts",
     title: "Core Concepts",
     icon: Book,
-    description: "Learn the fundamentals of the AWEN platform.",
+    description: `Learn the fundamentals of the ${BRAND.name} platform.`,
     articles: [
       { title: "Platform Architecture" },
       { title: "Kernels & Operations" },
@@ -40,7 +41,7 @@ const docsSections = [
       { title: "Custom Kernel Development" },
       { title: "Hardware Targets" },
       { title: "Performance Optimization" },
-      { title: "Contributing to AWEN" },
+      { title: `Contributing to ${BRAND.name}` },
     ],
   },
 ];
@@ -51,10 +52,10 @@ const DocsPage = () => {
   return (
     <>
       <Helmet>
-        <title>Documentation | AWEN Photonics</title>
+        <title>{`Documentation | ${BRAND.fullName}`}</title>
         <meta
           name="description"
-          content="Comprehensive documentation for the AWEN photonic computing platform. Guides, tutorials, and API reference."
+          content={`Comprehensive documentation for the ${BRAND.name} photonic computing platform. Guides, tutorials, and API reference.`}
         />
       </Helmet>
 
@@ -74,7 +75,7 @@ const DocsPage = () => {
                 <span className="text-primary">Documentation</span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
-                Everything you'll need to build with AWEN, from quick start guides to
+                Everything you'll need to build with {BRAND.name}, from quick start guides to
                 advanced tutorials. Full documentation arrives with the first release.
               </p>
 
@@ -105,7 +106,7 @@ const DocsPage = () => {
                   <Rocket className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">New to AWEN?</h3>
+                  <h3 className="font-semibold text-foreground">New to {BRAND.name}?</h3>
                   <p className="text-muted-foreground text-sm">
                     Guides and API reference are being written for the first release
                   </p>
@@ -188,7 +189,7 @@ const DocsPage = () => {
                   <code className="text-sm font-mono">
                     {`import awen
 
-# Initialize the AWEN runtime
+# Initialize the ${BRAND.name} runtime
 runtime = awen.Runtime()
 
 # Define a photonic circuit

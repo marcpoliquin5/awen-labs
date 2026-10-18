@@ -1,44 +1,49 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import WhatIsAwen from "@/components/WhatIsAwen";
-import StackDiagram from "@/components/StackDiagram";
-import ResourcesPreview from "@/components/ResourcesPreview";
-import GetStartedSection from "@/components/GetStartedSection";
-import CommunitySection from "@/components/CommunitySection";
 import Footer from "@/components/Footer";
+import LandingHero from "@/components/landing/LandingHero";
+import Vision from "@/components/landing/Vision";
+import Architecture from "@/components/landing/Architecture";
+import KernelPreview from "@/components/landing/KernelPreview";
+import Roadmap from "@/components/landing/Roadmap";
+import Principles from "@/components/landing/Principles";
+import DownloadCTA from "@/components/landing/DownloadCTA";
+import BrandSection from "@/components/landing/BrandSection";
+import { BRAND } from "@/config/brand";
 
 const Index = () => {
-  return (
-    <>
-      <Helmet>
-        <title>AWEN Photonics | Light-Powered Computing Infrastructure</title>
-        <meta
-          name="description"
-          content="AWEN is an open-source platform for photonic computing—simulation, kernels, orchestration, and developer tooling for the post-silicon era."
-        />
-        <meta property="og:title" content="AWEN Photonics" />
-        <meta
-          property="og:description"
-          content="Light-powered computing infrastructure for the post-silicon era."
-        />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://www.awenphotonics.com/" />
-      </Helmet>
+  useEffect(() => {
+    // Honor /#section links arriving from other routes.
+    const id = window.location.hash.slice(1);
+    if (id) requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView());
+  }, []);
 
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <main>
-          <Hero />
-          <WhatIsAwen />
-          <StackDiagram />
-          <ResourcesPreview />
-          <GetStartedSection />
-          <CommunitySection />
-        </main>
-        <Footer />
-      </div>
-    </>
+  return (
+  <>
+    <Helmet>
+      <title>{`${BRAND.fullName} | ${BRAND.tagline}`}</title>
+      <meta
+        name="description"
+        content={`${BRAND.name} is building a complete software platform for photonic computing, from an instruction set for light to a CUDA-like programming model for AI kernels. Download coming soon.`}
+      />
+      <link rel="canonical" href="https://www.awenphotonics.com/" />
+    </Helmet>
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>
+        <LandingHero />
+        <Vision />
+        <Architecture />
+        <KernelPreview />
+        <Roadmap />
+        <Principles />
+        <BrandSection />
+        <DownloadCTA />
+      </main>
+      <Footer />
+    </div>
+  </>
   );
 };
 

@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Github, MessageCircle, Mail, Users, Heart, BookOpen, Code, GitPullRequest } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { BRAND } from "@/config/brand";
 
 const contributionAreas = [
   {
@@ -29,10 +30,10 @@ const CommunityPage = () => {
   return (
     <>
       <Helmet>
-        <title>Community | AWEN Photonics</title>
+        <title>{`Community | ${BRAND.fullName}`}</title>
         <meta
           name="description"
-          content="Join the AWEN community. Connect with researchers and developers building the future of photonic computing."
+          content={`Join the ${BRAND.name} community. Connect with researchers and developers building the future of photonic computing.`}
         />
       </Helmet>
 
@@ -52,7 +53,7 @@ const CommunityPage = () => {
                 Join the <span className="text-primary">Community</span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                AWEN is being built for researchers, engineers, and developers
+                {BRAND.name} is being built for researchers, engineers, and developers
                 passionate about the future of computing. Community channels open
                 with the first release.
               </p>
@@ -123,7 +124,7 @@ const CommunityPage = () => {
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
                   Whether you're a physicist, software engineer, or technical writer—
-                  there's a place for you in the AWEN project.
+                  there's a place for you in the {BRAND.name} project.
                 </p>
               </motion.div>
 

@@ -8,26 +8,56 @@
 
 </div>
 
-AWEN Labs is the public-facing web experience for the AWEN photonic computing
-platform. It presents the platform stack, documentation entry points, research
-areas, downloads, and community channels in a single responsive site built with
-Vite, React, TypeScript, Tailwind CSS, and shadcn/ui components.
+AWEN Labs is the public-facing storefront for the AWEN photonic computing
+platform: a single long-scroll landing page with an interactive WebGL hero,
+plus supporting pages. Built with Vite, React, TypeScript, Tailwind CSS,
+React Three Fiber, and shadcn/ui components.
 
 ## What's on the site
 
-| Page | What it covers |
+| Section / page | What it covers |
 |---|---|
-| Platform | The software stack, from framework integration down to device control |
-| Research | Active research directions and their current status (in development, specification, planned) |
-| Docs | Entry points into the guides and specifications |
-| Downloads | Building from source; binary releases are on the roadmap |
-| Community | Issues, contributing, and release notes |
-| About | Mission and approach |
+| Hero | Interactive 3D interferometer mesh: gold waveguides, blue light pulses, live interference fringes |
+| Vision | A full platform for photonic computing, from an ISA for light to a CUDA-like kernel model |
+| Architecture | The stack layer by layer, each with an explicit status (Experimental, Reference, Specification, Vision) |
+| Roadmap | Now / Next / Later milestones (no dates) |
+| Brand | The mascot and palette |
+| Download | Coming soon via GitHub Releases |
+| Platform, Research, Docs, About | Supporting pages |
 
 > **Content policy.** Vision and roadmap are presented as such. Concrete
 > statements (benchmarks, hardware results, downloads) appear only when they can
 > be backed by published, reproducible evidence; anything still in progress is
 > labeled with its status.
+
+## Renaming the brand
+
+The brand name lives in one place: `src/config/brand.ts`. Change `name` there and
+the navigation, footer, page titles, meta tags in `index.html` (filled at build
+time by a small Vite plugin), and logo alt text all follow. Logo and favicon
+images live in `public/brand/` and `public/favicon*`.
+
+## Performance and accessibility
+
+- The three.js scene is code-split and only loaded on capable desktops, after
+  first interaction (or a short delay). Phones, `prefers-reduced-motion`,
+  Save-Data, and browsers without WebGL get a static SVG rendering of the same
+  mesh.
+- Rendering pauses when the hero is off-screen or the tab is hidden; resolution
+  and bloom adapt to measured frame rate.
+- Lenis smooth scrolling is disabled for reduced motion and touch devices.
+
+## Credits
+
+Open-source libraries (all MIT licensed):
+[three.js](https://github.com/mrdoob/three.js),
+[React Three Fiber](https://github.com/pmndrs/react-three-fiber),
+[drei](https://github.com/pmndrs/drei),
+[react-postprocessing](https://github.com/pmndrs/react-postprocessing),
+[Lenis](https://github.com/darkroomengineering/lenis) by darkroom.engineering,
+[Framer Motion](https://github.com/motiondivision/motion).
+No third-party templates, models, or image assets are used; the scene geometry
+and shaders are original.
 
 ## Project structure
 
@@ -35,6 +65,8 @@ Vite, React, TypeScript, Tailwind CSS, and shadcn/ui components.
 src/
 ├── pages/         Route-level pages (Index, Platform, Research, Docs, Downloads, Community, About)
 ├── components/    Shared layout and UI components (shadcn/ui based)
+│   └── landing/   Landing-page sections and the WebGL hero (PhotonicScene)
+├── config/        Brand configuration (single source for the name)
 ├── hooks/         React hooks
 ├── integrations/  Supabase client and generated types
 └── lib/           Utilities

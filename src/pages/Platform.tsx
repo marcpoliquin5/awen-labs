@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StackDiagram from "@/components/StackDiagram";
+import { BRAND } from "@/config/brand";
 
 const roadmapItems = [
   {
@@ -54,10 +55,10 @@ const PlatformPage = () => {
   return (
     <>
       <Helmet>
-        <title>Platform | AWEN Photonics</title>
+        <title>{`Platform | ${BRAND.fullName}`}</title>
         <meta
           name="description"
-          content="Explore the AWEN platform stack—from simulation to orchestration. A complete ecosystem for photonic computing."
+          content={`Explore the ${BRAND.name} platform stack—from simulation to orchestration. A complete ecosystem for photonic computing.`}
         />
       </Helmet>
 
@@ -74,10 +75,10 @@ const PlatformPage = () => {
               className="text-center mb-16"
             >
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-                The AWEN <span className="text-primary">Platform</span>
+                The {BRAND.name} <span className="text-primary">Platform</span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-                More than an SDK—AWEN is a complete platform and ecosystem for photonic 
+                More than an SDK—{BRAND.name} is a complete platform and ecosystem for photonic 
                 computing. From simulation to deployment, we provide the infrastructure 
                 layer that photonic applications need.
               </p>
@@ -131,7 +132,7 @@ const PlatformPage = () => {
                   {
                     title: "Hybrid Execution",
                     description:
-                      "Seamlessly mix photonic and electronic computation. AWEN automatically routes operations to the optimal hardware.",
+                      `Seamlessly mix photonic and electronic computation. ${BRAND.name} automatically routes operations to the optimal hardware.`,
                   },
                   {
                     title: "Unified Memory Model",
@@ -141,7 +142,7 @@ const PlatformPage = () => {
                   {
                     title: "Hardware Abstraction",
                     description:
-                      "Write once, run anywhere. AWEN compiles to multiple photonic platforms and simulators from a single codebase.",
+                      `Write once, run anywhere. ${BRAND.name} compiles to multiple photonic platforms and simulators from a single codebase.`,
                   },
                 ].map((concept, index) => (
                   <motion.div

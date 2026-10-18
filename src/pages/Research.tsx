@@ -5,13 +5,14 @@ import { Search, Filter, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ResearchGrid, { ResearchItem } from "@/components/ResearchGrid";
+import { BRAND } from "@/config/brand";
 
 const allResearch: ResearchItem[] = [
   {
     id: "1",
     title: "Photonic Matrix Multiplication Benchmarks",
     description:
-      "Full-system latency, energy, and accuracy comparison of photonic and electronic GEMM, using AWEN's versioned hardware-in-the-loop benchmark contract. Benchmark harness implemented; hardware results not yet published.",
+      `Full-system latency, energy, and accuracy comparison of photonic and electronic GEMM, using ${BRAND.name}'s versioned hardware-in-the-loop benchmark contract. Benchmark harness implemented; hardware results not yet published.`,
     tags: ["benchmarks", "GEMM", "hardware-in-the-loop"],
     status: "In Development",
     date: "AEP-0019",
@@ -20,7 +21,7 @@ const allResearch: ResearchItem[] = [
     id: "2",
     title: "Calibration-Aware Compilation",
     description:
-      "Compiling against measured calibration state: wavelength selection, drift-triggered artifact refresh, and remapping disabled cells to spares. Implemented in the AWEN compiler with simulated devices.",
+      `Compiling against measured calibration state: wavelength selection, drift-triggered artifact refresh, and remapping disabled cells to spares. Implemented in the ${BRAND.name} compiler with simulated devices.`,
     tags: ["calibration", "compiler", "fault-tolerance"],
     status: "Specification",
     date: "AEP-0018",
@@ -47,7 +48,7 @@ const allResearch: ResearchItem[] = [
     id: "5",
     title: "Photonic Kernel Semantics",
     description:
-      "Technical specification for AWEN's photonic kernels: primitives, execution semantics, and compilation targets. The foundation of a CUDA-class programming model for light.",
+      `Technical specification for ${BRAND.name}'s photonic kernels: primitives, execution semantics, and compilation targets. The foundation of a CUDA-class programming model for light.`,
     tags: ["kernels", "specification", "language"],
     status: "Specification",
     date: "AEP-0003",
@@ -56,7 +57,7 @@ const allResearch: ResearchItem[] = [
     id: "6",
     title: "Thermal Drift Compensation in PICs",
     description:
-      "Techniques for detecting and compensating thermal drift in photonic integrated circuits, building on AWEN's calibration and drift-triggered recompilation. Experimental validation is planned.",
+      `Techniques for detecting and compensating thermal drift in photonic integrated circuits, building on ${BRAND.name}'s calibration and drift-triggered recompilation. Experimental validation is planned.`,
     tags: ["thermal", "PIC", "calibration"],
     status: "Planned",
     date: "Roadmap",
@@ -94,10 +95,10 @@ const ResearchPage = () => {
   return (
     <>
       <Helmet>
-        <title>Research | AWEN Photonics</title>
+        <title>{`Research | ${BRAND.fullName}`}</title>
         <meta
           name="description"
-          content="Explore open research, experiments, and technical documentation from the AWEN Photonics project."
+          content={`Explore open research, experiments, and technical documentation from the ${BRAND.fullName} project.`}
         />
       </Helmet>
 
