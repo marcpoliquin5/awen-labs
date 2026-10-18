@@ -232,11 +232,11 @@ const PlatformPage = () => {
                               className="flex items-start gap-2 text-muted-foreground"
                             >
                               {period.status === "completed" ? (
-                                <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                                <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
                               ) : period.status === "current" ? (
-                                <Clock className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                                <Clock className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                               ) : (
-                                <Circle className="w-4 h-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                                <Circle className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
                               )}
                               {item}
                             </li>

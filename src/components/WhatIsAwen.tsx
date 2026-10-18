@@ -54,7 +54,7 @@ const WhatIsAwen = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="glass-card p-8 text-center group hover:border-primary/30 transition-all duration-500 glow-border"
               >
-                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-linear-to-br from-primary/20 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                   <Icon className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">

@@ -99,7 +99,7 @@ const StackDiagram = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div
-                        className={`w-12 h-12 rounded-lg bg-gradient-to-br ${layer.color} flex items-center justify-center shadow-lg`}
+                        className={`w-12 h-12 rounded-lg bg-linear-to-br ${layer.color} flex items-center justify-center shadow-lg`}
                       >
                         <Icon className="w-6 h-6 text-white" />
                       </div>
@@ -149,7 +149,7 @@ const StackDiagram = () => {
 
                 {/* Connection line */}
                 {index < stackLayers.length - 1 && (
-                  <div className="absolute left-10 top-full w-px h-3 bg-gradient-to-b from-border to-transparent" />
+                  <div className="absolute left-10 top-full w-px h-3 bg-linear-to-b from-border to-transparent" />
                 )}
               </motion.div>
             );

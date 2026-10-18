@@ -172,7 +172,7 @@ const DownloadsPage = () => {
                   { step: 5, title: "View results", code: "awen viz output/" },
                 ].map((item) => (
                   <div key={item.step} className="flex gap-4 items-start">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-semibold text-sm flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-semibold text-sm shrink-0">
                       {item.step}
                     </div>
                     <div className="flex-1">

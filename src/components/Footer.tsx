@@ -26,9 +26,9 @@ const footerLinks = {
 
 const Footer = () => {
   return (
-    <footer className="relative border-t border-border/30 bg-background/50 backdrop-blur-sm">
+    <footer className="relative border-t border-border/30 bg-background/50 backdrop-blur-xs">
       {/* Top glow effect */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
 
       <div className="container mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
