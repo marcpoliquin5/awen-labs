@@ -14,10 +14,9 @@ const docsSections = [
     icon: Rocket,
     description: "New to AWEN? Begin with these guides.",
     articles: [
-      { title: "Quick Start Guide", href: "#quick-start", time: "5 min" },
-      { title: "Installation", href: "#installation", time: "3 min" },
-      { title: "Your First Simulation", href: "#first-sim", time: "10 min" },
-      { title: "Understanding Photonic Computing", href: "#photonic-basics", time: "15 min" },
+      { title: "Quick Start Guide", href: "https://github.com/marcpoliquin5/awen/blob/main/README.md#quickstart", time: "5 min" },
+      { title: "Installation", href: "https://github.com/marcpoliquin5/awen/blob/main/README.md#build-and-verify", time: "3 min" },
+      { title: "Your First Simulation", href: "https://github.com/marcpoliquin5/awen/blob/main/README.md#execute-the-calibrated-reference-benchmark", time: "10 min" },
     ],
   },
   {
@@ -26,10 +25,10 @@ const docsSections = [
     icon: Book,
     description: "Learn the fundamentals of the AWEN platform.",
     articles: [
-      { title: "Platform Architecture", href: "#architecture", time: "8 min" },
-      { title: "Kernels & Operations", href: "#kernels", time: "12 min" },
-      { title: "Memory Model", href: "#memory", time: "10 min" },
-      { title: "Simulation Engine", href: "#simulation", time: "15 min" },
+      { title: "Platform Architecture", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/specs/computation-model.md", time: "8 min" },
+      { title: "Kernels & Operations", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/specs/kernel-semantics.md", time: "12 min" },
+      { title: "Memory Model", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/specs/memory-state.md", time: "10 min" },
+      { title: "Simulation Engine", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/specs/engine.md", time: "15 min" },
     ],
   },
   {
@@ -38,10 +37,10 @@ const docsSections = [
     icon: Code,
     description: "Deep dives for experienced developers.",
     articles: [
-      { title: "Custom Kernel Development", href: "#custom-kernels", time: "20 min" },
-      { title: "Hardware Targets", href: "#hardware", time: "15 min" },
-      { title: "Performance Optimization", href: "#optimization", time: "18 min" },
-      { title: "Contributing to AWEN", href: "#contributing", time: "10 min" },
+      { title: "Custom Kernel Development", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0015-awenblas-kernel-library.md", time: "20 min" },
+      { title: "Hardware Targets", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/specs/hal.md", time: "15 min" },
+      { title: "Performance Optimization", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0013-full-system-cost-model.md", time: "18 min" },
+      { title: "Contributing to AWEN", href: "https://github.com/marcpoliquin5/awen/blob/main/CONTRIBUTING.md", time: "10 min" },
     ],
   },
 ];
@@ -88,7 +87,7 @@ const DocsPage = () => {
                     placeholder="Search documentation..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full h-14 pl-12 pr-4 rounded-xl bg-secondary/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-lg"
+                    className="w-full h-14 pl-12 pr-4 rounded-xl bg-secondary/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-lg"
                   />
                 </div>
               </div>
@@ -108,7 +107,7 @@ const DocsPage = () => {
                 <div>
                   <h3 className="font-semibold text-foreground">New to AWEN?</h3>
                   <p className="text-muted-foreground text-sm">
-                    Start with our 5-minute quickstart guide
+                    Start with the quickstart: build AWEN from source
                   </p>
                 </div>
               </div>
@@ -150,6 +149,8 @@ const DocsPage = () => {
                         <li key={article.title}>
                           <a
                             href={article.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="flex items-center justify-between p-3 rounded-lg hover:bg-secondary/50 transition-colors group"
                           >
                             <span className="text-foreground group-hover:text-primary transition-colors">

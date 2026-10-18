@@ -1,7 +1,46 @@
-# AWEN Labs site
+<div align="center">
 
-This repository contains the Vite, React, and TypeScript source for the AWEN Labs
-site.
+# AWEN Labs
+
+**The web front end for AWEN, an open, experimental software stack for computing with light.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+</div>
+
+AWEN Labs is the public-facing web experience for the AWEN photonic computing
+platform. It presents the platform stack, documentation entry points, research
+areas, downloads, and community channels in a single responsive site built with
+Vite, React, TypeScript, Tailwind CSS, and shadcn/ui components.
+
+## What's on the site
+
+| Page | What it covers |
+|---|---|
+| Platform | The software stack, from framework integration down to device control |
+| Research | Active research directions and their current status (in development, specification, planned) |
+| Docs | Entry points into the guides and specifications |
+| Downloads | Building from source; binary releases are on the roadmap |
+| Community | Issues, contributing, and release notes |
+| About | Mission and approach |
+
+> **Content policy.** Vision and roadmap are presented as such. Concrete
+> statements (benchmarks, hardware results, downloads) appear only when they can
+> be backed by published, reproducible evidence; anything still in progress is
+> labeled with its status.
+
+## Project structure
+
+```text
+src/
+├── pages/         Route-level pages (Index, Platform, Research, Docs, Downloads, Community, About)
+├── components/    Shared layout and UI components (shadcn/ui based)
+├── hooks/         React hooks
+├── integrations/  Supabase client and generated types
+└── lib/           Utilities
+supabase/          Versioned migrations and project configuration
+scripts/           Repository security-policy check
+```
 
 ## Local setup
 

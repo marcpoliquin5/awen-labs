@@ -23,7 +23,7 @@ const Index = () => {
           content="Light-powered computing infrastructure for the post-silicon era."
         />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://awen.dev" />
+        <link rel="canonical" href="https://www.awenphotonics.com/" />
       </Helmet>
 
       <div className="min-h-screen bg-background">

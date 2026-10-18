@@ -134,7 +134,7 @@ const Hero = () => {
 
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-hero pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-background to-transparent pointer-events-none" />
 
       {/* Large ambient glow */}
       <motion.div
@@ -176,7 +176,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
           >
-            <span className="text-glow bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
+            <span className="text-glow bg-linear-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
               AWEN
             </span>
           </motion.h1>
@@ -213,7 +213,7 @@ const Hero = () => {
           >
             <Link to="/downloads">
               <Button variant="glow" size="lg" className="group">
-                Download / Get Started
+                Get Started
                 <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>

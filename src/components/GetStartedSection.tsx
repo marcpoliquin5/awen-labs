@@ -4,15 +4,15 @@ import { Download, Github, Terminal, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const GetStartedSection = () => {
-  const codeSnippet = `# Install AWEN CLI
-curl -sSL https://get.awen.dev | sh
+  const codeSnippet = `# Get the source
+git clone https://github.com/marcpoliquin5/awen.git
+cd awen
 
-# Create your first project
-awen init my-photonic-app
-cd my-photonic-app
+# Build and test the compiler
+cargo test --manifest-path awen-compiler/Cargo.toml
 
-# Run simulation
-awen simulate --config awen.toml`;
+# Use AWEN as a torch.compile backend
+pip install -e "awen-ecosystem/python_awen[frameworks]"`;
 
   return (
     <section className="py-24 relative">
@@ -28,7 +28,7 @@ awen simulate --config awen.toml`;
             Get <span className="text-primary">Started</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Up and running in under 5 minutes. No account required.
+            Open source and buildable today. No account required.
           </p>
         </motion.div>
 
@@ -47,28 +47,28 @@ awen simulate --config awen.toml`;
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-foreground">
-                  AWEN Starter
+                  AWEN from source
                 </h3>
                 <p className="text-muted-foreground text-sm">
-                  Latest stable release • v0.4.2
+                  Experimental • MIT licensed
                 </p>
               </div>
             </div>
 
             <p className="text-muted-foreground mb-6">
-              Complete development environment with CLI, simulator, and example
-              projects. Available for macOS, Linux, and Windows (WSL).
+              Compiler, runtime, simulator, and the awenctl CLI, built from source
+              with Rust and Python. Prebuilt releases are on the roadmap.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Link to="/downloads" className="flex-1">
                 <Button variant="glow" size="lg" className="w-full">
                   <Download className="mr-2 w-5 h-5" />
-                  Download Now
+                  Get AWEN
                 </Button>
               </Link>
               <a
-                href="https://github.com/awen-photonics/awen"
+                href="https://github.com/marcpoliquin5/awen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1"

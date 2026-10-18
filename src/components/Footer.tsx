@@ -17,8 +17,8 @@ const footerLinks = {
     { label: "Brand", href: "/about#brand" },
   ],
   Community: [
-    { label: "GitHub", href: "https://github.com/awen-photonics", external: true },
-    { label: "Discord", href: "https://discord.gg/awen", external: true },
+    { label: "GitHub", href: "https://github.com/marcpoliquin5/awen", external: true },
+    { label: "Issues", href: "https://github.com/marcpoliquin5/awen/issues", external: true },
     { label: "Contribute", href: "/community" },
     { label: "Contact", href: "/community#contact" },
   ],
@@ -26,9 +26,9 @@ const footerLinks = {
 
 const Footer = () => {
   return (
-    <footer className="relative border-t border-border/30 bg-background/50 backdrop-blur-sm">
+    <footer className="relative border-t border-border/30 bg-background/50 backdrop-blur-xs">
       {/* Top glow effect */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
 
       <div className="container mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
@@ -46,7 +46,7 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               <a
-                href="https://github.com/awen-photonics"
+                href="https://github.com/marcpoliquin5/awen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary transition-all"
@@ -54,7 +54,7 @@ const Footer = () => {
                 <Github className="w-5 h-5" />
               </a>
               <a
-                href="https://discord.gg/awen"
+                href="https://github.com/marcpoliquin5/awen/issues"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary transition-all"
@@ -62,7 +62,9 @@ const Footer = () => {
                 <MessageCircle className="w-5 h-5" />
               </a>
               <a
-                href="mailto:hello@awen.dev"
+                href="https://github.com/marcpoliquin5/awen/issues"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary transition-all"
               >
                 <Mail className="w-5 h-5" />

@@ -9,43 +9,43 @@ import StackDiagram from "@/components/StackDiagram";
 
 const roadmapItems = [
   {
-    quarter: "Q4 2024",
+    quarter: "Built",
     status: "completed",
     items: [
-      "AWEN-Sim v1.0 release",
-      "Basic kernel runtime",
-      "CLI tooling",
-      "Documentation site launch",
+      "Typed tensor-to-photonic compiler slice (Rust)",
+      "MLIR dialects lowering StableHLO GEMM to a versioned executable",
+      "Runtime, HAL, scheduler, and seeded analog-noise simulator",
+      "PyTorch torch.compile, JAX, and NumPy integration boundaries",
     ],
   },
   {
-    quarter: "Q1 2025",
+    quarter: "Now",
     status: "current",
     items: [
-      "MZI mesh support",
-      "Improved simulation performance",
-      "Neural network primitives",
-      "Community Discord launch",
+      "Calibration-aware compilation and fault remapping",
+      "awenBLAS kernel library hardening",
+      "Hardware-in-the-loop benchmark contracts",
+      "Open specifications and enhancement proposals",
     ],
   },
   {
-    quarter: "Q2 2025",
+    quarter: "Next",
     status: "planned",
     items: [
-      "Hardware abstraction layer",
-      "Multi-device orchestration",
-      "Visual circuit designer (alpha)",
-      "First hardware partner integration",
+      "First verified hardware-in-the-loop results",
+      "Framework regions lowered end to end to device commands",
+      "Binary releases and installer",
+      "Tutorials and API documentation",
     ],
   },
   {
-    quarter: "Q3-Q4 2025",
+    quarter: "Vision",
     status: "planned",
     items: [
-      "Full orchestration layer",
-      "Cloud simulation service",
-      "Production-ready runtime",
-      "Expanded hardware support",
+      "A photonic ISA: a stable execution contract for photonic processors, as x86-64 and ARM are for CPUs",
+      "A CUDA-class programming model: kernels, libraries, and runtime for AI on light",
+      "Orchestration across photonic, GPU, and CPU devices",
+      "An open ecosystem of hardware backends and plugins",
     ],
   },
 ];
@@ -175,7 +175,7 @@ const PlatformPage = () => {
                   Roadmap
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
-                  Where we are and where we're going. Updated quarterly.
+                  Where we are and where we're going.
                 </p>
               </motion.div>
 
@@ -232,11 +232,11 @@ const PlatformPage = () => {
                               className="flex items-start gap-2 text-muted-foreground"
                             >
                               {period.status === "completed" ? (
-                                <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                                <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
                               ) : period.status === "current" ? (
-                                <Clock className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                                <Clock className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                               ) : (
-                                <Circle className="w-4 h-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                                <Circle className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
                               )}
                               {item}
                             </li>

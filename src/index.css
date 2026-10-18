@@ -1,8 +1,238 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap')
+layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@theme {
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-mono: JetBrains Mono, monospace;
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-sidebar: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  --color-awen-midnight: hsl(var(--awen-midnight));
+  --color-awen-abyss: hsl(var(--awen-abyss));
+  --color-awen-electric: hsl(var(--awen-electric));
+  --color-awen-cyan: hsl(var(--awen-cyan));
+  --color-awen-glow: hsl(var(--awen-glow));
+  --color-awen-nebula: hsl(var(--awen-nebula));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-wave: wave 3s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
+
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-space: var(--gradient-space);
+  --background-image-gradient-glow: var(--gradient-glow);
+  --background-image-gradient-card: var(--gradient-card);
+  --background-image-gradient-hero: var(--gradient-hero);
+
+  --shadow-glow: var(--shadow-glow);
+  --shadow-glow-sm: var(--shadow-glow-sm);
+  --shadow-glow-cyan: var(--shadow-glow-cyan);
+  --shadow-card: var(--shadow-card);
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes wave {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility glass-card {
+  /* Glassmorphism Card */
+  @apply bg-card/40 backdrop-blur-xl border border-border/50 rounded-xl;
+  box-shadow: var(--shadow-card);
+}
+
+@utility glow-border {
+  /* Glowing border effect */
+  @apply relative;
+
+  &::before {
+    content: '';
+    @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500;
+    background: var(--gradient-glow);
+    filter: blur(20px);
+    z-index: -1;
+  }
+
+  &:hover::before {
+    @apply opacity-100;
+  }
+}
+
+@utility photon-line {
+  /* Photon line animation */
+  @apply h-px bg-linear-to-r from-transparent via-primary to-transparent;
+  animation: photon-flow 3s ease-in-out infinite;
+}
+
+@utility text-glow {
+  /* Text glow */
+  text-shadow: 0 0 40px hsl(217 91% 60% / 0.5);
+}
+
+@utility nebula-bg {
+  /* Subtle nebula background */
+  @apply relative overflow-hidden;
+
+  &::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background:
+      radial-gradient(
+        ellipse 60% 40% at 20% 30%,
+        hsl(217 91% 60% / 0.05) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 50% 50% at 80% 60%,
+        hsl(187 94% 48% / 0.03) 0%,
+        transparent 70%
+      );
+  }
+}
 
 @layer base {
   :root {
@@ -86,55 +316,6 @@
 
   ::selection {
     @apply bg-primary/30 text-foreground;
-  }
-}
-
-@layer components {
-  /* Glassmorphism Card */
-  .glass-card {
-    @apply bg-card/40 backdrop-blur-xl border border-border/50 rounded-xl;
-    box-shadow: var(--shadow-card);
-  }
-
-  /* Glowing border effect */
-  .glow-border {
-    @apply relative;
-  }
-  
-  .glow-border::before {
-    content: '';
-    @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500;
-    background: var(--gradient-glow);
-    filter: blur(20px);
-    z-index: -1;
-  }
-  
-  .glow-border:hover::before {
-    @apply opacity-100;
-  }
-
-  /* Photon line animation */
-  .photon-line {
-    @apply h-px bg-gradient-to-r from-transparent via-primary to-transparent;
-    animation: photon-flow 3s ease-in-out infinite;
-  }
-
-  /* Text glow */
-  .text-glow {
-    text-shadow: 0 0 40px hsl(217 91% 60% / 0.5);
-  }
-
-  /* Subtle nebula background */
-  .nebula-bg {
-    @apply relative overflow-hidden;
-  }
-  
-  .nebula-bg::before {
-    content: '';
-    @apply absolute inset-0 pointer-events-none;
-    background: 
-      radial-gradient(ellipse 60% 40% at 20% 30%, hsl(217 91% 60% / 0.05) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 50% at 80% 60%, hsl(187 94% 48% / 0.03) 0%, transparent 70%);
   }
 }
 

@@ -7,22 +7,22 @@ const communityLinks = [
     icon: Github,
     title: "GitHub",
     description: "Browse source, report issues, submit PRs",
-    href: "https://github.com/awen-photonics",
+    href: "https://github.com/marcpoliquin5/awen",
     action: "View Repository",
   },
   {
     icon: MessageCircle,
-    title: "Discord",
-    description: "Chat with developers and researchers",
-    href: "https://discord.gg/awen",
-    action: "Join Server",
+    title: "Issues & Discussion",
+    description: "Ask questions, propose ideas, and report bugs",
+    href: "https://github.com/marcpoliquin5/awen/issues",
+    action: "Open Issues",
   },
   {
     icon: Mail,
-    title: "Mailing List",
-    description: "Monthly updates on releases and research",
-    href: "mailto:newsletter@awen.dev",
-    action: "Subscribe",
+    title: "Release Updates",
+    description: "Watch the repository to follow releases",
+    href: "https://github.com/marcpoliquin5/awen/releases",
+    action: "Watch Releases",
   },
 ];
 
@@ -98,7 +98,7 @@ const CommunitySection = () => {
             interested in photonic computing. Whether you want to contribute code,
             share research, or help with documentation—there's a place for you.
           </p>
-          <a href="mailto:collaborate@awen.dev">
+          <a href="https://github.com/marcpoliquin5/awen/issues" target="_blank" rel="noopener noreferrer">
             <Button variant="glow" size="lg">
               <Mail className="mr-2 w-5 h-5" />
               Get in Touch
