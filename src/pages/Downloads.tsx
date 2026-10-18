@@ -1,8 +1,7 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Download, ArrowRight, FileText, Clock } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { BRAND } from "@/config/brand";
 
 const plannedReleases = [
@@ -23,10 +22,9 @@ const DownloadsPage = () => {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
-        <Navbar />
+      <div className="min-h-screen">
         
-        <main className="pt-32 pb-24">
+        <div className="pt-32 pb-24">
           <div className="container mx-auto px-6">
             {/* Hero */}
             <motion.div
@@ -95,12 +93,12 @@ const DownloadsPage = () => {
                   <FileText className="w-5 h-5 text-primary" />
                   Changelog
                 </h3>
-                <a
-                  href="/platform#roadmap"
+                <Link
+                  to="/roadmap"
                   className="text-primary hover:text-accent transition-colors text-sm flex items-center gap-1"
                 >
                   View Roadmap <ArrowRight className="w-4 h-4" />
-                </a>
+                </Link>
               </div>
               <div className="glass-card p-6">
                 <p className="text-muted-foreground">
@@ -110,9 +108,7 @@ const DownloadsPage = () => {
               </div>
             </motion.div>
           </div>
-        </main>
-
-        <Footer />
+        </div>
       </div>
     </>
   );

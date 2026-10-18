@@ -1,14 +1,12 @@
-import { ArrowDown, Clock } from "lucide-react";
-import HeroVisual from "./HeroVisual";
+import { ArrowRight, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 import { BRAND } from "@/config/brand";
 
 export default function LandingHero() {
   return (
     <section className="relative min-h-[100svh] flex items-center overflow-hidden" aria-labelledby="hero-title">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,hsl(43_74%_55%/0.14),transparent_60%),radial-gradient(ellipse_at_20%_80%,hsl(208_88%_60%/0.08),transparent_55%)]" />
-      <HeroVisual />
-      <div className="absolute inset-0 bg-linear-to-r from-background via-background/75 to-transparent md:via-background/40 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-background to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-r from-background/85 via-background/40 to-transparent pointer-events-none" />
 
       <div className="container relative mx-auto px-6 pt-28 pb-20">
         <div className="max-w-2xl">
@@ -33,7 +31,7 @@ export default function LandingHero() {
           </h1>
           <p className="hero-enter [animation-delay:450ms] mt-6 text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl">
             {BRAND.name} is building a complete software platform for photonic computing: from an
-            instruction set for light up to a CUDA-like programming model for AI kernels.
+            instruction set for light up to a programming layer where you write an AI kernel once and the platform handles memory, parallelism, and execution on light.
           </p>
           <div className="hero-enter [animation-delay:600ms] mt-10 flex flex-col sm:flex-row gap-3">
             <a
@@ -43,13 +41,13 @@ export default function LandingHero() {
               <Clock className="h-4 w-4" />
               Download coming soon
             </a>
-            <a
-              href="#architecture"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background/40 px-6 py-3.5 text-sm font-semibold text-foreground backdrop-blur transition hover:border-primary/50 hover:bg-primary/5"
+            <Link
+              to="/architecture"
+              className="group inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background/40 px-6 py-3.5 text-sm font-semibold text-foreground backdrop-blur transition hover:border-primary/50 hover:bg-primary/5"
             >
               Explore the architecture
-              <ArrowDown className="h-4 w-4" />
-            </a>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
         </div>
       </div>

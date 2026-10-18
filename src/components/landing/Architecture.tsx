@@ -4,7 +4,7 @@ import { BRAND } from "@/config/brand";
 
 type Status = "Experimental" | "Reference" | "Specification" | "Vision";
 
-const layers: { name: string; detail: string; items: string[]; status: Status }[] = [
+export const layers: { name: string; detail: string; items: string[]; status: Status }[] = [
   {
     name: "Frameworks",
     detail: "Bring existing models. Integration points for the frameworks AI teams already use.",
@@ -19,8 +19,8 @@ const layers: { name: string; detail: string; items: string[]; status: Status }[
   },
   {
     name: "Kernel programming model",
-    detail: "A CUDA-like way to write AI kernels for light, on top of a typed kernel library with CPU reference implementations.",
-    items: ["Kernel library", "CPU references", "CUDA-like kernels"],
+    detail: "Write a kernel once; the platform schedules, compiles, and runs it on photonic hardware, handling memory, parallelism, and execution for you. Built on a typed kernel library with CPU reference implementations.",
+    items: ["Kernel library", "CPU references", "Write-once kernels"],
     status: "Vision",
   },
   {

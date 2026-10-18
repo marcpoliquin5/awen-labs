@@ -4,8 +4,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Book, Code, Rocket, Search, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { BRAND } from "@/config/brand";
 
 const docsSections = [
@@ -59,10 +57,9 @@ const DocsPage = () => {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
-        <Navbar />
+      <div className="min-h-screen">
 
-        <main className="pt-32 pb-24">
+        <div className="pt-32 pb-24">
           <div className="container mx-auto px-6">
             {/* Header */}
             <motion.div
@@ -130,7 +127,7 @@ const DocsPage = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                    className="glass-card p-6"
+                    className="glass-card lift p-6"
                   >
                     <div className="flex items-center gap-3 mb-4">
                       <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -208,9 +205,7 @@ print(f"Output power: {result.power:.3f}")`}
               </div>
             </motion.div>
           </div>
-        </main>
-
-        <Footer />
+        </div>
       </div>
     </>
   );

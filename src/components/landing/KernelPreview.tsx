@@ -21,7 +21,7 @@ const color: Record<string, string> = {
 
 export default function KernelPreview() {
   return (
-    <section className="relative py-28 md:py-32">
+    <section id="kernels" className="relative py-28 md:py-32 scroll-mt-20">
       <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center [&>*]:min-w-0">
         <SectionHeading eyebrow="Programming model" title="Write the math. Let light do the multiply.">
           The goal is a developer experience that feels familiar to anyone who has written a GPU

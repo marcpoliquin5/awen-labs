@@ -409,3 +409,25 @@ html {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Animated SVG backdrops (mobile, reduced motion, loading) */
+@keyframes mb-dash { from { stroke-dashoffset: 1800; } to { stroke-dashoffset: 0; } }
+.mb-dash { stroke-dasharray: 60 1740; animation: mb-dash 5s linear infinite; }
+@keyframes mb-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+.mb-float { animation: mb-float 5s ease-in-out infinite; }
+@keyframes mb-pulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
+.mb-pulse { animation: mb-pulse 2.4s ease-in-out infinite; }
+@keyframes mb-travel { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+.mb-travel { animation: mb-travel 6s linear infinite; }
+@keyframes mb-ripple { from { transform: scale(0.05); opacity: 0.8; } to { transform: scale(1); opacity: 0; } }
+.mb-ripple { transform-box: view-box; animation: mb-ripple 4.8s linear infinite; }
+@keyframes mb-stream { from { stroke-dashoffset: 900; } to { stroke-dashoffset: 0; } }
+.mb-stream { stroke-dasharray: 40 260; animation: mb-stream 4s linear infinite; }
+@keyframes mb-spin { to { transform: rotate(360deg); } }
+.mb-spin { animation: mb-spin 20s linear infinite; }
+@keyframes mb-enter { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: none; } }
+.mb-enter { animation: mb-enter 0.9s ease-out both; transform-origin: center; }
+
+/* Hover micro-interaction for cards */
+.lift { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s, border-color 0.35s; }
+.lift:hover { transform: translateY(-4px); box-shadow: 0 18px 50px -20px hsl(43 74% 55% / 0.45); border-color: hsl(43 74% 55% / 0.45); }

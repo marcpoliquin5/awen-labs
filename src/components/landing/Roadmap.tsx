@@ -2,7 +2,7 @@ import { Check, CircleDot, Circle } from "lucide-react";
 import Reveal, { SectionHeading } from "./Reveal";
 import { BRAND } from "@/config/brand";
 
-const phases = [
+export const phases = [
   {
     label: "Now",
     title: "Simulation-first stack",
@@ -32,7 +32,7 @@ const phases = [
     icon: Circle,
     tone: "text-muted-foreground border-border bg-secondary/40",
     items: [
-      "CUDA-like kernel programming model for AI workloads",
+      "Kernel programming layer: write once, and the platform schedules, compiles, and runs it on light",
       "Photonic instruction set architecture",
       "Support for physical photonic processors",
     ],
@@ -55,7 +55,7 @@ export default function Roadmap() {
                   <p.icon className="h-4 w-4" />
                   {p.label}
                 </span>
-                <div className="mt-6 rounded-2xl border border-border/60 bg-card/40 p-7 h-full">
+                <div className="mt-6 rounded-2xl border border-border/60 bg-card/40 p-7 h-full lift backdrop-blur">
                   <h3 className="text-xl font-semibold text-foreground">{p.title}</h3>
                   <ul className="mt-5 space-y-3">
                     {p.items.map((it) => (

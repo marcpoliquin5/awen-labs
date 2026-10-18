@@ -1,3 +1,4 @@
+import { asset } from "@/lib/asset";
 import { BRAND } from "@/config/brand";
 
 /** Circular brand badge (mascot face), served as WebP with a PNG fallback. */
@@ -8,10 +9,10 @@ export default function BrandLogo({ size = 36, className = "" }: { size?: number
       style={{ width: size, height: size }}
     >
       <picture>
-        <source type="image/webp" srcSet="/brand/logo-64.webp 64w, /brand/logo-128.webp 128w" sizes={`${size}px`} />
+        <source type="image/webp" srcSet={`${asset("/brand/logo-64.webp")} 64w, ${asset("/brand/logo-128.webp")} 128w`} sizes={`${size}px`} />
         <img
-          src="/brand/logo-64.png"
-          srcSet="/brand/logo-64.png 64w, /brand/logo-128.png 128w"
+          src={asset("/brand/logo-64.png")}
+          srcSet={`${asset("/brand/logo-64.png")} 64w, ${asset("/brand/logo-128.png")} 128w`}
           sizes={`${size}px`}
           width={size}
           height={size}
