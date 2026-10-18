@@ -13,6 +13,7 @@ export const phases = [
       "Runtime, scheduler, and calibration-aware compilation",
       "Seeded analog-noise simulator with CPU reference comparison",
       "Framework integration for PyTorch, JAX, and NumPy",
+      "Prebuilt v0.1.0 pre-release on GitHub Releases, with SHA-256 checksums and SBOMs",
     ],
   },
   {
@@ -21,7 +22,7 @@ export const phases = [
     icon: CircleDot,
     tone: "text-accent border-accent/50 bg-accent/10",
     items: [
-      "Prebuilt, signed releases via GitHub Releases",
+      "Cryptographically signed release artifacts",
       "Getting-started guides and API reference",
       "Hardware-in-the-loop benchmarking with published, reproducible artifacts",
     ],
