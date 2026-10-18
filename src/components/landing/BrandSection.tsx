@@ -9,7 +9,7 @@ export default function BrandSection() {
       <div className="container relative mx-auto px-6 grid md:grid-cols-[1fr_1.1fr] gap-12 lg:gap-20 items-center">
         <Reveal>
           <div className="lift relative mx-auto max-w-sm md:max-w-none">
-            <div className="absolute -inset-6 rounded-[2.5rem] bg-[conic-gradient(from_180deg,hsl(43_74%_55%/0.35),hsl(208_88%_60%/0.25),hsl(43_74%_55%/0.35))] blur-3xl opacity-60" aria-hidden="true" />
+            <div className="absolute -inset-6 rounded-[2.5rem] bg-[conic-gradient(from_180deg,hsl(43_74%_55%/0.35),hsl(172_70%_62%/0.25),hsl(43_74%_55%/0.35))] blur-3xl opacity-60" aria-hidden="true" />
             <picture>
               <source
                 type="image/webp"
