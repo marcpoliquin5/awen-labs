@@ -9,63 +9,62 @@ import ResearchGrid, { ResearchItem } from "@/components/ResearchGrid";
 const allResearch: ResearchItem[] = [
   {
     id: "1",
-    title: "Optical Matrix Multiplication: A Benchmark Study",
+    title: "Photonic Matrix Multiplication Benchmarks",
     description:
-      "Comparative analysis of photonic vs electronic matrix multiplication across different scales. Includes power consumption and latency measurements on real hardware.",
-    tags: ["benchmarks", "MVM", "power", "hardware"],
-    status: "Published",
-    date: "Dec 2024",
-    link: "/research/optical-matrix-multiplication",
+      "Full-system latency, energy, and accuracy comparison of photonic and electronic GEMM, using AWEN's versioned hardware-in-the-loop benchmark contract. Benchmark harness implemented; hardware results not yet published.",
+    tags: ["benchmarks", "GEMM", "hardware-in-the-loop"],
+    status: "In Development",
+    date: "AEP-0019",
+    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0019-hardware-in-the-loop-benchmarking.md",
   },
   {
     id: "2",
-    title: "Waveguide Simulation Accuracy in AWEN-Sim",
+    title: "Calibration-Aware Compilation",
     description:
-      "Validation of our simulation engine against experimental measurements from fabricated silicon photonic circuits. Accuracy within 2% of measured values.",
-    tags: ["simulation", "validation", "silicon"],
-    status: "Published",
-    date: "Nov 2024",
-    link: "/research/waveguide-simulation",
+      "Compiling against measured calibration state: wavelength selection, drift-triggered artifact refresh, and remapping disabled cells to spares. Implemented in the AWEN compiler with simulated devices.",
+    tags: ["calibration", "compiler", "fault-tolerance"],
+    status: "Specification",
+    date: "AEP-0018",
+    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0018-calibration-aware-compilation.md",
   },
   {
     id: "3",
     title: "Neural Network Inference on Photonic Hardware",
     description:
-      "Mapping neural network operations to photonic primitives. Includes results from MNIST and CIFAR-10 classification with 94% and 78% accuracy respectively.",
+      "Mapping neural network operations to photonic primitives through a torch.compile backend and StableHLO lowering. Framework integration implemented as a reference boundary; accuracy results on hardware are planned.",
     tags: ["ML", "inference", "neural-nets"],
-    status: "Draft",
-    date: "Jan 2025",
-    link: "/research/photonic-nn-inference",
+    status: "In Development",
+    date: "AEP-0016",
+    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0016-framework-integration.md",
   },
   {
     id: "4",
-    title: "Mach-Zehnder Interferometer Mesh Optimization",
+    title: "Precision and Error Contracts for Analog Compute",
     description:
-      "Novel algorithms for configuring large-scale MZI meshes. Reduces setup time from O(n²) to O(n log n) for matrices up to 256x256.",
-    tags: ["MZI", "optimization", "algorithms"],
-    status: "Published",
-    date: "Oct 2024",
-    link: "/research/mzi-optimization",
+      "Explicit storage, compute, accumulator, and output precision, with scaling, signed bit slicing, saturation, and error-budget validation for analog photonic execution.",
+    tags: ["precision", "analog", "error-contracts"],
+    status: "Specification",
+    date: "AEP-0017",
+    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0017-precision-and-error-contracts.md",
   },
   {
     id: "5",
-    title: "Photonic Kernel Language Specification",
+    title: "Photonic Kernel Semantics",
     description:
-      "Technical specification for AWEN's photonic kernel language. Defines primitives, memory model, and compilation targets.",
+      "Technical specification for AWEN's photonic kernels: primitives, execution semantics, and compilation targets. The foundation of a CUDA-class programming model for light.",
     tags: ["kernels", "specification", "language"],
-    status: "Draft",
-    date: "Dec 2024",
-    link: "/research/kernel-spec",
+    status: "Specification",
+    date: "AEP-0003",
+    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0003-kernel-semantics.md",
   },
   {
     id: "6",
-    title: "Thermal Drift Compensation in PIC",
+    title: "Thermal Drift Compensation in PICs",
     description:
-      "Real-time compensation techniques for thermal drift in photonic integrated circuits. Experimental validation on commercial PIC platforms.",
-    tags: ["thermal", "PIC", "compensation"],
-    status: "Prototype",
-    date: "Sep 2024",
-    link: "/research/thermal-compensation",
+      "Techniques for detecting and compensating thermal drift in photonic integrated circuits, building on AWEN's calibration and drift-triggered recompilation. Experimental validation is planned.",
+    tags: ["thermal", "PIC", "calibration"],
+    status: "Planned",
+    date: "Roadmap",
   },
 ];
 
@@ -123,7 +122,7 @@ const ResearchPage = () => {
                 Open <span className="text-primary">Research</span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Papers, experiments, and technical notes—all freely available. 
+                Specifications, research directions, and technical notes—all freely available. 
                 No paywalls, no gating, no signup required.
               </p>
             </motion.div>
@@ -154,7 +153,7 @@ const ResearchPage = () => {
                 <span className="text-sm text-muted-foreground flex items-center gap-1">
                   <Filter className="w-4 h-4" /> Status:
                 </span>
-                {["Published", "Draft", "Prototype"].map((status) => (
+                {["Specification", "In Development", "Planned"].map((status) => (
                   <button
                     key={status}
                     onClick={() =>

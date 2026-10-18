@@ -213,7 +213,7 @@ const Hero = () => {
           >
             <Link to="/downloads">
               <Button variant="glow" size="lg" className="group">
-                Download / Get Started
+                Get Started
                 <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>

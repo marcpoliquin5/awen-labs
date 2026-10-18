@@ -6,7 +6,7 @@ const features = [
     icon: Zap,
     title: "Photonic Speed",
     description:
-      "Leverage light-speed computation for matrix operations, neural inference, and signal processing at unprecedented throughput.",
+      "Designed to harness light for matrix operations, neural inference, and signal processing, where interference performs the math as light propagates.",
   },
   {
     icon: Layers,

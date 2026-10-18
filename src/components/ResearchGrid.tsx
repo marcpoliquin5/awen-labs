@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { FileText, ExternalLink, Tag } from "lucide-react";
 
 export interface ResearchItem {
@@ -7,7 +6,7 @@ export interface ResearchItem {
   title: string;
   description: string;
   tags: string[];
-  status: "Prototype" | "Draft" | "Published";
+  status: "Specification" | "In Development" | "Planned";
   date: string;
   link?: string;
 }
@@ -18,9 +17,9 @@ interface ResearchGridProps {
 }
 
 const statusColors = {
-  Prototype: "bg-orange-500/20 text-orange-400 border-orange-500/30",
-  Draft: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-  Published: "bg-green-500/20 text-green-400 border-green-500/30",
+  Specification: "bg-green-500/20 text-green-400 border-green-500/30",
+  "In Development": "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
+  Planned: "bg-orange-500/20 text-orange-400 border-orange-500/30",
 };
 
 const ResearchGrid = ({ items, limit }: ResearchGridProps) => {
@@ -73,13 +72,15 @@ const ResearchGrid = ({ items, limit }: ResearchGridProps) => {
           <div className="flex items-center justify-between pt-4 border-t border-border/50">
             <span className="text-xs text-muted-foreground">{item.date}</span>
             {item.link && (
-              <Link
-                to={item.link}
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-sm text-primary hover:text-accent transition-colors"
               >
                 Read more
                 <ExternalLink className="w-4 h-4" />
-              </Link>
+              </a>
             )}
           </div>
         </motion.article>

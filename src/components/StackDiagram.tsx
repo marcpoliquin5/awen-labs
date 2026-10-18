@@ -6,7 +6,7 @@ const stackLayers = [
   {
     id: "orchestration",
     name: "Orchestration Layer",
-    description: "Distribute workloads across photonic hardware, simulators, and hybrid systems. Intelligent scheduling for maximum throughput.",
+    description: "Distribute workloads across photonic hardware, simulators, and hybrid systems. Designed for intelligent scheduling across devices.",
     icon: Cloud,
     color: "from-cyan-500 to-blue-500",
     status: "In Development",
@@ -14,34 +14,34 @@ const stackLayers = [
   {
     id: "runtime",
     name: "Runtime & Kernels",
-    description: "Execute photonic operations with optimized kernels. Native support for matrix operations, FFT, and neural network primitives.",
+    description: "Execute photonic operations with optimized kernels. The awenBLAS library defines 22 executable kernel kinds with reference, simulated, and dispatch paths.",
     icon: Cpu,
     color: "from-blue-500 to-indigo-500",
-    status: "Alpha",
+    status: "Experimental",
   },
   {
     id: "simulation",
     name: "Simulation Engine",
-    description: "High-fidelity optical physics simulation. Model waveguides, interferometers, and photonic circuits before hardware.",
+    description: "Model photonic execution before hardware. Today: a seeded analog-noise and calibrated-transfer simulator with CPU comparison; physical design through gdsfactory integration.",
     icon: Gauge,
     color: "from-indigo-500 to-purple-500",
-    status: "Beta",
+    status: "Experimental",
   },
   {
     id: "abstraction",
     name: "Abstraction Layer",
-    description: "Unified API across different photonic hardware. Write once, deploy anywhere from simulators to real chips.",
+    description: "A unified hardware abstraction layer across photonic devices, designed so code written once runs on simulators today and on photonic chips as backends arrive.",
     icon: Layers,
     color: "from-purple-500 to-pink-500",
-    status: "Stable",
+    status: "Experimental",
   },
   {
     id: "tooling",
     name: "Developer Tools",
-    description: "CLI, debugger, profiler, and visualization tools. Integrated development environment for photonic applications.",
+    description: "CLI, debugger, profiler, and visualization tools. The awenctl CLI and profiling traces exist today; a full photonic development environment is in progress.",
     icon: Wrench,
     color: "from-pink-500 to-rose-500",
-    status: "Alpha",
+    status: "In Development",
   },
   {
     id: "workflows",
@@ -109,11 +109,7 @@ const StackDiagram = () => {
                         </h3>
                         <span
                           className={`text-xs font-medium px-2 py-0.5 rounded-full ${
-                            layer.status === "Stable"
-                              ? "bg-green-500/20 text-green-400"
-                              : layer.status === "Beta"
-                              ? "bg-blue-500/20 text-blue-400"
-                              : layer.status === "Alpha"
+                            layer.status === "Experimental"
                               ? "bg-yellow-500/20 text-yellow-400"
                               : layer.status === "In Development"
                               ? "bg-orange-500/20 text-orange-400"

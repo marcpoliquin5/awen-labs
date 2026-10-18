@@ -6,33 +6,33 @@ import ResearchGrid, { ResearchItem } from "./ResearchGrid";
 const sampleResearch: ResearchItem[] = [
   {
     id: "1",
-    title: "Optical Matrix Multiplication: A Benchmark Study",
+    title: "Photonic Matrix Multiplication Benchmarks",
     description:
-      "Comparative analysis of photonic vs electronic matrix multiplication across different scales. Includes power consumption and latency measurements.",
-    tags: ["benchmarks", "MVM", "power"],
-    status: "Published",
-    date: "Dec 2024",
-    link: "/research/optical-matrix-multiplication",
+      "Full-system latency, energy, and accuracy comparison of photonic and electronic GEMM, using AWEN's versioned hardware-in-the-loop benchmark contract. Benchmark harness implemented; hardware results not yet published.",
+    tags: ["benchmarks", "GEMM", "hardware-in-the-loop"],
+    status: "In Development",
+    date: "AEP-0019",
+    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0019-hardware-in-the-loop-benchmarking.md",
   },
   {
     id: "2",
-    title: "Waveguide Simulation Accuracy in AWEN-Sim",
+    title: "Calibration-Aware Compilation",
     description:
-      "Validation of our simulation engine against experimental measurements from fabricated silicon photonic circuits.",
-    tags: ["simulation", "validation", "silicon"],
-    status: "Published",
-    date: "Nov 2024",
-    link: "/research/waveguide-simulation",
+      "Compiling against measured calibration state: wavelength selection, drift-triggered artifact refresh, and remapping disabled cells to spares. Implemented in the AWEN compiler with simulated devices.",
+    tags: ["calibration", "compiler", "fault-tolerance"],
+    status: "Specification",
+    date: "AEP-0018",
+    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0018-calibration-aware-compilation.md",
   },
   {
     id: "3",
     title: "Neural Network Inference on Photonic Hardware",
     description:
-      "Mapping neural network operations to photonic primitives. Includes results from MNIST and CIFAR-10 classification.",
+      "Mapping neural network operations to photonic primitives through a torch.compile backend and StableHLO lowering. Framework integration implemented as a reference boundary; accuracy results on hardware are planned.",
     tags: ["ML", "inference", "neural-nets"],
-    status: "Draft",
-    date: "Jan 2025",
-    link: "/research/photonic-nn-inference",
+    status: "In Development",
+    date: "AEP-0016",
+    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0016-framework-integration.md",
   },
 ];
 

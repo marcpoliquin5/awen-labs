@@ -257,13 +257,14 @@ const AboutPage = () => {
                   open source under the MIT License.
                 </p>
                 <p className="text-muted-foreground">
-                  For the full privacy policy and terms of service, please visit 
-                  our GitHub repository or contact us at{" "}
+                  Questions about privacy, licensing, or terms? Open an issue on{" "}
                   <a
-                    href="mailto:legal@awen.dev"
+                    href="https://github.com/marcpoliquin5/awen/issues"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-primary hover:text-accent transition-colors"
                   >
-                    legal@awen.dev
+                    GitHub
                   </a>
                 </p>
               </motion.div>

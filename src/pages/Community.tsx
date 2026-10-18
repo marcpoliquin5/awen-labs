@@ -66,26 +66,26 @@ const CommunityPage = () => {
                   title: "GitHub",
                   description:
                     "Browse the source code, report issues, and submit pull requests.",
-                  href: "https://github.com/awen-photonics",
+                  href: "https://github.com/marcpoliquin5/awen",
                   action: "View Repository",
                   stats: "2.4k stars",
                 },
                 {
                   icon: MessageCircle,
-                  title: "Discord",
+                  title: "Issues & Discussion",
                   description:
-                    "Real-time chat with developers and researchers. Get help, share ideas.",
-                  href: "https://discord.gg/awen",
-                  action: "Join Server",
+                    "Ask questions, propose ideas, and report bugs on GitHub Issues.",
+                  href: "https://github.com/marcpoliquin5/awen/issues",
+                  action: "Open Issues",
                   stats: "1.2k members",
                 },
                 {
                   icon: Mail,
                   title: "Newsletter",
                   description:
-                    "Monthly updates on releases, research, and community highlights.",
-                  href: "mailto:newsletter@awen.dev",
-                  action: "Subscribe",
+                    "Watch the repository on GitHub to be notified of releases.",
+                  href: "https://github.com/marcpoliquin5/awen/releases",
+                  action: "Watch Releases",
                   stats: "5k subscribers",
                 },
               ].map((link, index) => {
@@ -199,14 +199,14 @@ const CommunityPage = () => {
                 and research partnerships available.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="mailto:collaborate@awen.dev">
+                <a href="https://github.com/marcpoliquin5/awen/issues" target="_blank" rel="noopener noreferrer">
                   <Button variant="glow" size="lg">
                     <Mail className="mr-2 w-5 h-5" />
                     Contact for Collaboration
                   </Button>
                 </a>
                 <a
-                  href="https://github.com/awen-photonics/awen/blob/main/CONTRIBUTING.md"
+                  href="https://github.com/marcpoliquin5/awen/blob/main/CONTRIBUTING.md"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
