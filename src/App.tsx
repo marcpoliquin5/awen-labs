@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import BackgroundStage from "./components/stage/BackgroundStage";
 import { sceneStore } from "./lib/sceneStore";
+import { useTilt } from "./components/stage/useTilt";
 
 const Vision = lazy(() => import("./pages/Vision"));
 const Architecture = lazy(() => import("./pages/Architecture"));
@@ -74,8 +75,14 @@ function AnimatedRoutes() {
   );
 }
 
+function Effects() {
+  useTilt();
+  return null;
+}
+
 const App = () => (
   <HelmetProvider>
+    <Effects />
     <MotionConfig reducedMotion="user">
       <SmoothScroll />
       <BrowserRouter basename={basename}>

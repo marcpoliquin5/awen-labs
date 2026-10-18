@@ -13,7 +13,7 @@ export default function DownloadCTA() {
     <section id="download" className="relative py-28 md:py-36 scroll-mt-20">
       <div className="container mx-auto px-6">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-linear-to-br from-primary/15 via-card/60 to-accent/10 px-8 py-16 md:px-16 text-center">
+          <div className="lift relative overflow-hidden rounded-3xl border border-primary/30 bg-linear-to-br from-primary/15 via-card/60 to-accent/10 px-8 py-16 md:px-16 text-center">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,hsl(43_74%_55%/0.25),transparent_60%)]" aria-hidden="true" />
             <div className="relative">
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">Download</p>

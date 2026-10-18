@@ -60,7 +60,7 @@ export default function Vision() {
         </div>
 
         <Reveal className="mt-16">
-          <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-linear-to-br from-primary/10 via-card/40 to-accent/5 p-8 md:p-12">
+          <div className="lift relative overflow-hidden rounded-2xl border border-border/60 bg-linear-to-br from-primary/10 via-card/40 to-accent/5 p-8 md:p-12">
             <Waves className="absolute -right-6 -top-6 h-40 w-40 text-primary/10" aria-hidden="true" />
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">Why light</p>
             <p className="mt-4 max-w-3xl text-xl md:text-2xl leading-relaxed text-foreground">
