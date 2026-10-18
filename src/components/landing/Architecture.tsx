@@ -94,7 +94,7 @@ export default function Architecture() {
           </Reveal>
 
           <Reveal delay={0.1} className="lg:sticky lg:top-28">
-            <div className="rounded-2xl border border-border/60 bg-card/50 p-8 backdrop-blur min-h-[280px]" aria-live="polite">
+            <div className="lift rounded-2xl border border-border/60 bg-card/50 p-8 backdrop-blur min-h-[280px]" aria-live="polite">
               <p className="font-mono text-xs text-accent">Layer {String(active + 1).padStart(2, "0")}</p>
               <h3 className="mt-3 text-2xl font-semibold text-foreground">{layers[active].name}</h3>
               <p className="mt-4 text-muted-foreground leading-relaxed">{layers[active].detail}</p>

@@ -5,6 +5,8 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { sceneStore, type SceneMode } from "@/lib/sceneStore";
 import { MODE_INDEX, formation } from "./formations";
+import Bubbles from "./Bubbles";
+import { installInteraction, interaction } from "./interaction";
 
 const COUNT = 6000;
 const BACKGROUND = new THREE.Color("#090807");
@@ -31,6 +33,7 @@ const vertexShader = /* glsl */ `
   uniform float uModeB;
   uniform float uPixel;
   uniform vec2 uPointer;
+  uniform vec4 uShock;
   varying vec3 vColor;
   varying float vAlpha;
 
@@ -115,8 +118,26 @@ const vertexShader = /* glsl */ `
     p += normalize(p + vec3(0.001)) * burst * (0.6 + aSeedB.x * 1.2);
     float b = mix(bA, bB, m);
     vColor = mix(cA, cB, m);
-    vAlpha = clamp(b, 0.0, 2.0);
+    // Shockwave from a popped bubble.
+    float age = uTime - uShock.w;
+    if (age < 2.5) {
+      vec3 wp = (modelMatrix * vec4(p, 1.0)).xyz;
+      vec3 dv = wp - uShock.xyz;
+      float dist = length(dv);
+      float ring = exp(-pow(dist - age * 5.0, 2.0) * 1.5) * exp(-age * 1.6);
+      p += (transpose(mat3(modelMatrix)) * normalize(dv + vec3(0.0001))) * ring * 0.9;
+      b += ring * 2.0;
+      vColor = mix(vColor, vec3(0.75, 0.9, 1.0), clamp(ring, 0.0, 1.0));
+    }
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
+    // Points part around the cursor and light up near it.
+    vec4 clip = projectionMatrix * mv;
+    vec2 ndc = clip.xy / clip.w;
+    vec2 away = ndc - uPointer;
+    float near = exp(-dot(away, away) * 28.0);
+    mv.xy += normalize(away + vec2(0.0001)) * near * 0.06 * -mv.z;
+    b += near * 1.2;
+    vAlpha = clamp(b, 0.0, 2.2);
     gl_PointSize = uPixel * (0.9 + b * 1.1) * (26.0 / -mv.z);
     gl_Position = projectionMatrix * mv;
   }
@@ -134,10 +155,12 @@ const fragmentShader = /* glsl */ `
   }
 `;
 
-function Formations({ pointer }: { pointer: React.MutableRefObject<THREE.Vector2> }) {
+function Formations() {
   const { camera, gl } = useThree();
   const morph = useRef({ a: sceneStore.mode, b: sceneStore.mode, t: 1 });
   const lookAt = useRef(FRAMING[sceneStore.mode][1].clone());
+  const group = useRef<THREE.Group>(null);
+  const v = useMemo(() => ({ target: new THREE.Vector3(), look: new THREE.Vector3(), off: new THREE.Vector3() }), []);
 
   const { geometry, material } = useMemo(() => {
     const f = formation(sceneStore.mode, COUNT);
@@ -161,7 +184,8 @@ function Formations({ pointer }: { pointer: React.MutableRefObject<THREE.Vector2
         uModeA: { value: idx },
         uModeB: { value: idx },
         uPixel: { value: gl.getPixelRatio() },
-        uPointer: { value: new THREE.Vector2() },
+        uPointer: { value: new THREE.Vector2(9, 9) },
+        uShock: { value: new THREE.Vector4(0, 0, 0, -100) },
       },
     });
     return { geometry: g, material: m };
@@ -200,38 +224,64 @@ function Formations({ pointer }: { pointer: React.MutableRefObject<THREE.Vector2
     u.uPixel.value = state.gl.getPixelRatio();
     const scroll = Math.min(2, window.scrollY / window.innerHeight);
     u.uScroll.value += (scroll - u.uScroll.value) * 0.1;
-    const px = Math.abs(pointer.current.x) <= 1 ? pointer.current.x : 0;
-    const py = Math.abs(pointer.current.y) <= 1 ? pointer.current.y : 0;
-    u.uPointer.value.set(px, -py);
+    const { x: nx, y: ny } = interaction.ndc;
+    const hasCursor = Math.abs(nx) <= 1 && Math.abs(ny) <= 1;
+    u.uPointer.value.set(hasCursor ? nx : 9, hasCursor ? ny : 9);
+    const px = hasCursor ? nx : 0, py = hasCursor ? -ny : 0;
 
-    // Camera glides to the active scene's framing, with scroll dolly and pointer parallax.
+    // Drag to rotate, with inertia, easing back to rest when released.
+    const r = interaction.rot;
+    r.y += r.vy; r.x += r.vx;
+    r.vy *= 0.92; r.vx *= 0.92;
+    if (!interaction.dragging) { r.y *= 0.995; r.x *= 0.97; }
+    r.x = Math.max(-0.9, Math.min(0.9, r.x));
+    if (group.current) {
+      group.current.rotation.y = r.y + px * 0.12;
+      group.current.rotation.x = r.x + py * 0.06;
+    }
+
+    // Scroll-driven camera: dolly in, drop, and orbit with page progress.
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = max > 0 ? window.scrollY / max : 0;
     const [pos, look] = FRAMING[st.b];
     const k = 1 - Math.exp(-dt * 2.2);
     const s = u.uScroll.value;
-    const target = new THREE.Vector3(pos.x + px * 0.6, pos.y + py * 0.4 - s * 1.1, pos.z - Math.min(s, 1) * 1.6);
-    camera.position.lerp(target, k);
-    lookAt.current.lerp(new THREE.Vector3(look.x + px * 0.2, look.y - s * 0.6, look.z), k);
+    v.off.copy(pos).sub(look).applyAxisAngle(new THREE.Vector3(0, 1, 0), (progress - 0.15) * 0.9);
+    v.target.copy(look).add(v.off);
+    v.target.x += px * 0.6;
+    v.target.y += py * 0.4 - s * 1.1;
+    v.target.z -= Math.min(s, 1) * 1.6;
+    camera.position.lerp(v.target, k);
+    lookAt.current.lerp(v.look.set(look.x + px * 0.2, look.y - s * 0.6, look.z), k);
     camera.lookAt(lookAt.current);
   });
 
-  return <points geometry={geometry} material={material} frustumCulled={false} />;
+  const onPop = (at: THREE.Vector3) => {
+    material.uniforms.uShock.value.set(at.x, at.y, at.z, material.uniforms.uTime.value);
+  };
+
+  return (
+    <>
+      <group ref={group}>
+        <points geometry={geometry} material={material} frustumCulled={false} />
+      </group>
+      <Bubbles onPop={onPop} />
+    </>
+  );
 }
 
 export default function BackgroundCanvas({ onReady }: { onReady?: () => void }) {
-  const pointer = useRef(new THREE.Vector2(9, 9));
   const [active, setActive] = useState(!document.hidden);
   const [dpr, setDpr] = useState(1.5);
   const [bloom, setBloom] = useState(true);
 
   useEffect(() => {
     const onVis = () => setActive(!document.hidden);
-    const onMove = (e: PointerEvent) =>
-      pointer.current.set((e.clientX / window.innerWidth) * 2 - 1, (e.clientY / window.innerHeight) * 2 - 1);
+    const uninstall = installInteraction();
     document.addEventListener("visibilitychange", onVis);
-    window.addEventListener("pointermove", onMove, { passive: true });
     return () => {
       document.removeEventListener("visibilitychange", onVis);
-      window.removeEventListener("pointermove", onMove);
+      uninstall();
     };
   }, []);
 
@@ -246,7 +296,7 @@ export default function BackgroundCanvas({ onReady }: { onReady?: () => void }) 
       <color attach="background" args={[BACKGROUND]} />
       <PerformanceMonitor onDecline={() => { setDpr(1); setBloom(false); }} onIncline={() => setDpr(1.5)} />
       <AdaptiveDpr pixelated={false} />
-      <Formations pointer={pointer} />
+      <Formations />
       {bloom && (
         <EffectComposer multisampling={0}>
           <Bloom mipmapBlur luminanceThreshold={0.2} luminanceSmoothing={0.35} intensity={0.85} radius={0.65} />

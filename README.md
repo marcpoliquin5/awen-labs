@@ -27,6 +27,13 @@ React Three Fiber, Framer Motion, and shadcn/ui components.
 | `/about` | Gold core with orbiting light | Mission statement and brand guidelines |
 | `/downloads`, `/community` | Timeline, orbit | Release status and how to get involved |
 
+On desktop the background is interactive everywhere: points part and light up
+around the cursor, the scene can be dragged to rotate (with inertia), floating
+light bubbles drift away from the cursor and pop with a shockwave when clicked,
+the camera orbits and dollies with scroll on every page, and cards tilt toward
+the cursor with a following glow. On phones, taps send out a ripple of light
+over the animated backdrop.
+
 Download is marked "coming soon" (GitHub Releases). Counters only show numbers
 derived from the site's own content (for example, the number of layers listed).
 
