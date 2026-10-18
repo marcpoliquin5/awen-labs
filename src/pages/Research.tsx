@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { Search, Filter, X } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import ResearchGrid, { ResearchItem } from "@/components/ResearchGrid";
 import { BRAND } from "@/config/brand";
 
@@ -48,7 +46,7 @@ const allResearch: ResearchItem[] = [
     id: "5",
     title: "Photonic Kernel Semantics",
     description:
-      `Technical specification for ${BRAND.name}'s photonic kernels: primitives, execution semantics, and compilation targets. The foundation of a CUDA-class programming model for light.`,
+      `Technical specification for ${BRAND.name}'s photonic kernels: primitives, execution semantics, and compilation targets. The foundation of a write-once kernel programming layer for light.`,
     tags: ["kernels", "specification", "language"],
     status: "Specification",
     date: "AEP-0003",
@@ -102,10 +100,9 @@ const ResearchPage = () => {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
-        <Navbar />
+      <div className="min-h-screen">
 
-        <main className="pt-32 pb-24">
+        <div className="pt-32 pb-24">
           <div className="container mx-auto px-6">
             {/* Header */}
             <motion.div
@@ -118,8 +115,8 @@ const ResearchPage = () => {
                 Open <span className="text-primary">Research</span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Specifications, research directions, and technical notes—all freely available. 
-                No paywalls, no gating, no signup required.
+                The specifications and research directions behind the platform. Evidence reports
+                will be published as each result can be reproduced.
               </p>
             </motion.div>
 
@@ -207,9 +204,7 @@ const ResearchPage = () => {
               </motion.div>
             )}
           </div>
-        </main>
-
-        <Footer />
+        </div>
       </div>
     </>
   );

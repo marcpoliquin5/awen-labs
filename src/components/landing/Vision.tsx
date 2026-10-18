@@ -10,7 +10,7 @@ const pillars = [
   {
     icon: Cpu,
     title: "Program light like a GPU",
-    body: "A CUDA-like programming model for AI kernels on photonic hardware: express the math once, and let the toolchain map it onto interferometer meshes.",
+    body: "A programming layer that lets developers write kernels once and have the platform schedule, compile, and run them efficiently on photonic hardware: memory, parallelism, and execution handled for you.",
     tag: "Vision",
   },
   {
@@ -41,7 +41,7 @@ export default function Vision() {
         <div className="grid md:grid-cols-3 gap-5">
           {pillars.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.08}>
-              <article className="group relative h-full rounded-2xl border border-border/60 bg-card/40 p-7 backdrop-blur transition hover:border-primary/40 hover:bg-card/70">
+              <article className="group relative h-full rounded-2xl border border-border/60 bg-card/40 p-7 backdrop-blur transition hover:border-primary/40 hover:bg-card/70 lift">
                 <div className="flex items-center justify-between">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20">
                     <p.icon className="h-5 w-5" />

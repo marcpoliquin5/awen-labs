@@ -1,3 +1,4 @@
+import { asset } from "@/lib/asset";
 import Reveal from "./Reveal";
 import { BRAND } from "@/config/brand";
 
@@ -12,11 +13,11 @@ export default function BrandSection() {
             <picture>
               <source
                 type="image/webp"
-                srcSet="/brand/mascot-640.webp 640w, /brand/mascot-1100.webp 1100w"
+                srcSet={`${asset("/brand/mascot-640.webp")} 640w, ${asset("/brand/mascot-1100.webp")} 1100w`}
                 sizes="(min-width: 768px) 40vw, 90vw"
               />
               <img
-                src="/brand/mascot-640.jpg"
+                src={asset("/brand/mascot-640.jpg")}
                 width={640}
                 height={741}
                 loading="lazy"

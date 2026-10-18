@@ -4,13 +4,13 @@ import { BRAND } from "@/config/brand";
 
 const columns = {
   Platform: [
-    { label: "Vision", href: "/#vision" },
-    { label: "Architecture", href: "/#architecture" },
-    { label: "Roadmap", href: "/#roadmap" },
-    { label: "Download", href: "/#download" },
+    { label: "Vision", href: "/vision" },
+    { label: "Architecture", href: "/architecture" },
+    { label: "Roadmap", href: "/roadmap" },
+    { label: "Downloads", href: "/downloads" },
   ],
   Explore: [
-    { label: "Platform", href: "/platform" },
+    { label: "Community", href: "/community" },
     { label: "Research", href: "/research" },
     { label: "Docs", href: "/docs" },
     { label: "About", href: "/about" },
@@ -23,7 +23,7 @@ const Footer = () => (
     <div className="container mx-auto px-6 py-16">
       <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr]">
         <div>
-          <Link to="/" className="flex items-center gap-3 mb-5" aria-label={`${BRAND.name} home`}>
+          <Link to="/" className="group flex items-center gap-3 mb-5" aria-label={`${BRAND.name} home`}>
             <BrandLogo size={36} className="transition-transform duration-300 group-hover:scale-105" />
             <span className="text-lg font-semibold tracking-tight text-foreground">{BRAND.name}</span>
           </Link>
@@ -37,9 +37,9 @@ const Footer = () => (
             <ul className="space-y-3">
               {links.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link to={l.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

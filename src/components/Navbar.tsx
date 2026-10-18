@@ -1,13 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 import BrandLogo from "./BrandLogo";
 import { BRAND } from "@/config/brand";
 
 const navItems = [
-  { label: "Vision", href: "/#vision" },
-  { label: "Architecture", href: "/#architecture" },
-  { label: "Roadmap", href: "/#roadmap" },
+  { label: "Vision", href: "/vision" },
+  { label: "Architecture", href: "/architecture" },
+  { label: "Roadmap", href: "/roadmap" },
   { label: "Research", href: "/research" },
   { label: "Docs", href: "/docs" },
   { label: "About", href: "/about" },
@@ -25,6 +26,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  useEffect(() => setOpen(false), [location.pathname]);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -34,13 +36,25 @@ const Navbar = () => {
   }, []);
 
   const onHome = location.pathname === "/";
-  const resolve = (href: string) => (onHome && href.startsWith("/#") ? href.slice(1) : href);
   const [section, setSection] = useState<{ index: number; label: string } | null>(null);
   const [progress, setProgress] = useState(0);
 
   // Section "ruler": shows where you are on the long home page.
   useEffect(() => {
-    if (!onHome) return;
+    const onScrollProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? window.scrollY / max : 0);
+    };
+    onScrollProgress();
+    window.addEventListener("scroll", onScrollProgress, { passive: true });
+    return () => window.removeEventListener("scroll", onScrollProgress);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!onHome) {
+      setSection(null);
+      return;
+    }
     const els = rulerSections
       .map((r) => document.getElementById(r.id))
       .filter((e): e is HTMLElement => !!e);
@@ -57,8 +71,6 @@ const Navbar = () => {
     );
     els.forEach((e) => io.observe(e));
     const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(max > 0 ? window.scrollY / max : 0);
       if (window.scrollY < window.innerHeight * 0.5) setSection(null);
     };
     onScroll();
@@ -69,7 +81,7 @@ const Navbar = () => {
     };
   }, [onHome]);
 
-  const isActive = (href: string) => !href.includes("#") && location.pathname === href;
+  const isActive = (href: string) => location.pathname === href;
   const linkClass = (href: string) =>
     `px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
       isActive(href) ? "text-foreground bg-secondary/60" : "text-muted-foreground hover:text-foreground"
@@ -104,18 +116,23 @@ const Navbar = () => {
 
         <div className="hidden lg:flex items-center gap-1">
           {navItems.map((item) => (
-            <a key={item.href} href={resolve(item.href)} className={linkClass(item.href)}>
-              {item.label}
-            </a>
+            <Link key={item.href} to={item.href} className={linkClass(item.href)}>
+              <span className="relative">
+                {item.label}
+                {isActive(item.href) && (
+                  <motion.span layoutId="nav-underline" className="absolute -bottom-1.5 left-0 right-0 h-px bg-linear-to-r from-primary to-accent" />
+                )}
+              </span>
+            </Link>
           ))}
         </div>
 
-        <a
-          href={resolve("/#download")}
+        <Link
+          to={{ pathname: "/", hash: "#download" }}
           className="hidden lg:inline-flex items-center rounded-xl border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary/20"
         >
           Download · coming soon
-        </a>
+        </Link>
 
         <button
           type="button"
@@ -127,30 +144,28 @@ const Navbar = () => {
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
-      {onHome && (
-        <div className="absolute inset-x-0 bottom-0 h-px bg-transparent" aria-hidden="true">
-          <div
-            className="h-full origin-left bg-linear-to-r from-primary via-primary to-accent"
-            style={{ transform: `scaleX(${progress})` }}
-          />
-        </div>
-      )}
+      <div className="absolute inset-x-0 bottom-0 h-px bg-transparent" aria-hidden="true">
+        <div
+          className="h-full origin-left bg-linear-to-r from-primary via-primary to-accent"
+          style={{ transform: `scaleX(${progress})` }}
+        />
+      </div>
 
       {open && (
         <div className="lg:hidden border-t border-border/50">
           <div className="container mx-auto px-6 py-4 flex flex-col gap-1">
             {navItems.map((item) => (
-              <a key={item.href} href={resolve(item.href)} onClick={() => setOpen(false)} className={`${linkClass(item.href)} py-3`}>
+              <Link key={item.href} to={item.href} onClick={() => setOpen(false)} className={`${linkClass(item.href)} py-3`}>
                 {item.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href={resolve("/#download")}
+            <Link
+              to={{ pathname: "/", hash: "#download" }}
               onClick={() => setOpen(false)}
               className="mt-2 rounded-xl border border-primary/50 bg-primary/10 px-4 py-3 text-center text-sm font-semibold text-primary"
             >
               Download · coming soon
-            </a>
+            </Link>
           </div>
         </div>
       )}

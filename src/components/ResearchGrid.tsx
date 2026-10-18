@@ -34,7 +34,7 @@ const ResearchGrid = ({ items, limit }: ResearchGridProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="glass-card p-6 group hover:border-primary/30 transition-all duration-300 glow-border"
+          className="glass-card lift p-6 group glow-border"
         >
           <div className="flex items-start justify-between mb-4">
             <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">

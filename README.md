@@ -9,21 +9,26 @@
 </div>
 
 AWEN Labs is the public-facing storefront for the AWEN photonic computing
-platform: a single long-scroll landing page with an interactive WebGL hero,
-plus supporting pages. Built with Vite, React, TypeScript, Tailwind CSS,
-React Three Fiber, and shadcn/ui components.
+platform. Every page sits on one persistent WebGL background whose scene morphs
+as you move through the site, with animated route transitions, scroll-driven
+reveals, and parallax. Built with Vite, React, TypeScript, Tailwind CSS,
+React Three Fiber, Framer Motion, and shadcn/ui components.
 
 ## What's on the site
 
-| Section / page | What it covers |
-|---|---|
-| Hero | Interactive 3D interferometer mesh: gold waveguides, blue light pulses, live interference fringes |
-| Vision | A full platform for photonic computing, from an ISA for light to a CUDA-like kernel model |
-| Architecture | The stack layer by layer, each with an explicit status (Experimental, Reference, Specification, Vision) |
-| Roadmap | Now / Next / Later milestones (no dates) |
-| Brand | The mascot and palette |
-| Download | Coming soon via GitHub Releases |
-| Platform, Research, Docs, About | Supporting pages |
+| Route | Background scene | What it covers |
+|---|---|---|
+| `/` | Shifts per section | Landing page: hero, vision, architecture, kernels, roadmap, brand, download |
+| `/vision` | Waveguide lattice with traveling light pulses | A full platform for photonic computing, from an instruction set for light to a write-once kernel programming layer |
+| `/architecture` | Layered stack that separates as you scroll | The stack layer by layer, each with an explicit status (Experimental, Reference, Specification, Vision) |
+| `/roadmap` | Light beam spiralling through milestones | Now / Next / Later milestones (no dates) |
+| `/research` | Two-source interference field (reacts to the pointer) | Specifications and research directions |
+| `/docs` | Flowing data streams | Documentation outline (arrives with the first release) |
+| `/about` | Gold core with orbiting light | Mission statement and brand guidelines |
+| `/downloads`, `/community` | Timeline, orbit | Release status and how to get involved |
+
+Download is marked "coming soon" (GitHub Releases). Counters only show numbers
+derived from the site's own content (for example, the number of layers listed).
 
 > **Content policy.** Vision and roadmap are presented as such. Concrete
 > statements (benchmarks, hardware results, downloads) appear only when they can
@@ -39,12 +44,15 @@ images live in `public/brand/` and `public/favicon*`.
 
 ## Performance and accessibility
 
-- The three.js scene is code-split and only loaded on capable desktops, after
-  first interaction (or a short delay). Phones, `prefers-reduced-motion`,
-  Save-Data, and browsers without WebGL get a static SVG rendering of the same
-  mesh.
-- Rendering pauses when the hero is off-screen or the tab is hidden; resolution
-  and bloom adapt to measured frame rate.
+- One shared canvas for the whole site: a single point system (6,000 points)
+  morphs between per-route formations in a custom vertex shader, and the camera
+  glides to each scene's framing. Route changes never create a new WebGL context.
+- The three.js bundle is code-split and only loaded on capable desktops, after
+  first interaction (or a 5 s delay). Phones, Save-Data, and browsers without
+  WebGL get lightweight animated SVG backdrops per scene; `prefers-reduced-motion`
+  gets the same backdrops without motion.
+- Rendering pauses when the tab is hidden; resolution and bloom adapt to
+  measured frame rate.
 - Lenis smooth scrolling is disabled for reduced motion and touch devices.
 
 ## Credits
@@ -63,13 +71,14 @@ and shaders are original.
 
 ```text
 src/
-├── pages/         Route-level pages (Index, Platform, Research, Docs, Downloads, Community, About)
+├── pages/         Route-level pages (Index, Vision, Architecture, Roadmap, Research, Docs, Downloads, Community, About)
 ├── components/    Shared layout and UI components (shadcn/ui based)
-│   └── landing/   Landing-page sections and the WebGL hero (PhotonicScene)
+│   ├── landing/   Content sections shared by the home page and route pages
+│   └── stage/     Persistent background: WebGL scene, formations, SVG fallbacks, page headers
 ├── config/        Brand configuration (single source for the name)
 ├── hooks/         React hooks
 ├── integrations/  Supabase client and generated types
-└── lib/           Utilities
+└── lib/           Utilities, including the route-to-scene store
 supabase/          Versioned migrations and project configuration
 scripts/           Repository security-policy check
 ```

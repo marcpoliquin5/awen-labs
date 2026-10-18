@@ -7,7 +7,7 @@ export default function Principles() {
     <section className="relative py-20">
       <div className="container mx-auto px-6">
         <Reveal>
-          <div className="mx-auto max-w-4xl flex flex-col md:flex-row gap-6 md:items-center rounded-2xl border border-border/60 bg-card/30 p-8">
+          <div className="mx-auto max-w-4xl flex flex-col md:flex-row gap-6 md:items-center rounded-2xl border border-border/60 bg-card/30 p-8 lift backdrop-blur">
             <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-accent/10 text-accent ring-1 ring-accent/20">
               <ShieldCheck className="h-7 w-7" />
             </span>

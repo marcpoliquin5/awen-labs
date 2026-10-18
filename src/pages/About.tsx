@@ -1,10 +1,16 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { Sparkles, Users, Target, Palette } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { Palette } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
 import { BRAND } from "@/config/brand";
+
+// Mission statement: the team's beliefs and intent, not claims of fact.
+const mission = [
+  `AI's progress is now bound by physics as much as by ideas. We know where classical, electronic computing runs out of room: power, heat, and the cost of moving data. ${BRAND.name} exists to push past those limits, for the benefit of everyone, not for the sake of a market cycle.`,
+  "Light is the most promising way forward. Photons carry enormous bandwidth, move data with little loss, and lend themselves naturally to the matrix and tensor math at the heart of modern AI. That makes photonics a foundation for what comes next, from denser, cooler data centers on Earth to computing that may one day run in orbit.",
+  "The road won't be straight. There will be hard walls, corrections, and shifts in supply and demand along the way. We're building for the long arc anyway: a complete software platform that lets the rest of the stack meet light where it is.",
+  "And we believe one more thing: that a focused builder, armed with today's tools, can move the frontier further than anyone expects.",
+];
 
 const AboutPage = () => {
   return (
@@ -13,110 +19,51 @@ const AboutPage = () => {
         <title>{`About | ${BRAND.fullName}`}</title>
         <meta
           name="description"
-          content={`Learn about ${BRAND.fullName}—our mission, team, and brand. Building the future of photonic computing.`}
+          content={`Why ${BRAND.name} builds with light: the mission behind a complete software platform for photonic computing.`}
         />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
-        <Navbar />
+      <div className="min-h-screen">
 
-        <main className="pt-32 pb-24">
+        <div className="pt-32 pb-24">
           <div className="container mx-auto px-6">
-            {/* Hero */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-24"
-            >
-              <BrandLogo size={96} className="mx-auto mb-8" />
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-                About <span className="text-primary">{BRAND.name}</span>
-              </h1>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Named for the Celtic concept of creative inspiration and flowing 
-                energy—{BRAND.name} represents our vision of computation powered by the 
-                fundamental nature of light.
-              </p>
-            </motion.div>
-
             {/* Mission */}
-            <section className="mb-24">
+            <section className="grid gap-12 lg:grid-cols-[1fr_1.4fr] items-start mb-28">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="glass-card p-12 max-w-4xl mx-auto text-center"
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                className="lg:sticky lg:top-32"
               >
-                <Target className="w-12 h-12 text-primary mx-auto mb-6" />
-                <h2 className="text-2xl font-bold text-foreground mb-4">
-                  Our Mission
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  To democratize photonic computing by building open-source infrastructure 
-                  that makes light-speed computation accessible to researchers, developers, 
-                  and organizations worldwide. We believe the future of computing should 
-                  be open, efficient, and sustainable.
-                </p>
+                <div className="relative mx-auto w-fit">
+                  <div className="absolute -inset-10 rounded-full bg-[radial-gradient(circle,hsl(43_74%_55%/0.35),transparent_65%)] blur-2xl animate-pulse" aria-hidden="true" />
+                  <BrandLogo size={160} className="relative" />
+                </div>
+                <p className="mt-8 text-center font-mono text-xs uppercase tracking-[0.3em] text-accent">Mission statement</p>
               </motion.div>
-            </section>
-
-            {/* Values */}
-            <section className="mb-24">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-12"
-              >
-                <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                  Our <span className="text-primary">Values</span>
-                </h2>
-              </motion.div>
-
-              <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                {[
-                  {
-                    icon: Sparkles,
-                    title: "Open Science",
-                    description:
-                      "All research published freely. All code open source. Knowledge should accelerate progress, not gatekeep it.",
-                  },
-                  {
-                    icon: Users,
-                    title: "Community First",
-                    description:
-                      "Built by the community, for the community. Every contributor matters. Every voice is heard.",
-                  },
-                  {
-                    icon: Target,
-                    title: "Practical Impact",
-                    description:
-                      "Beautiful theory means nothing without real-world application. We ship working software.",
-                  },
-                ].map((value, index) => {
-                  const Icon = value.icon;
-                  return (
-                    <motion.div
-                      key={value.title}
-                      initial={{ opacity: 0, y: 20 }}
+              <div>
+                <motion.h1
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05]"
+                >
+                  Why we build with <span className="text-gold-metal">light</span>
+                </motion.h1>
+                <div className="mt-10 space-y-6 text-lg md:text-xl leading-relaxed text-muted-foreground">
+                  {mission.map((p, i) => (
+                    <motion.p
+                      key={i}
+                      initial={{ opacity: 0, y: 24 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="glass-card p-8 text-center"
+                      viewport={{ once: true, margin: "-60px" }}
+                      transition={{ duration: 0.7, delay: i === 0 ? 0.3 : 0, ease: [0.22, 1, 0.36, 1] }}
+                      className={i === mission.length - 1 ? "border-l-2 border-primary/60 pl-6 text-foreground" : ""}
                     >
-                      <div className="w-14 h-14 mx-auto mb-6 rounded-xl bg-primary/10 flex items-center justify-center">
-                        <Icon className="w-7 h-7 text-primary" />
-                      </div>
-                      <h3 className="text-lg font-semibold text-foreground mb-3">
-                        {value.title}
-                      </h3>
-                      <p className="text-muted-foreground">{value.description}</p>
-                    </motion.div>
-                  );
-                })}
+                      {p}
+                    </motion.p>
+                  ))}
+                </div>
               </div>
             </section>
 
@@ -146,7 +93,7 @@ const AboutPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
-                  className="glass-card p-8"
+                  className="glass-card lift p-8"
                 >
                   <h3 className="text-lg font-semibold text-foreground mb-6">
                     Color Palette
@@ -180,7 +127,7 @@ const AboutPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
-                  className="glass-card p-8"
+                  className="glass-card lift p-8"
                 >
                   <h3 className="text-lg font-semibold text-foreground mb-6">
                     Typography
@@ -199,7 +146,7 @@ const AboutPage = () => {
                         Code: JetBrains Mono
                       </p>
                       <p className="text-xl font-mono text-foreground">
-                        const photon = await awen.simulate();
+                        {`const photon = await ${BRAND.name.toLowerCase()}.simulate();`}
                       </p>
                     </div>
                   </div>
@@ -211,7 +158,7 @@ const AboutPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
-                  className="glass-card p-8"
+                  className="glass-card lift p-8"
                 >
                   <h3 className="text-lg font-semibold text-foreground mb-6">
                     Tone of Voice
@@ -241,13 +188,14 @@ const AboutPage = () => {
             </section>
 
             {/* Legal */}
-            <section id="privacy" className="max-w-4xl mx-auto">
+            <section id="privacy" className="max-w-4xl mx-auto scroll-mt-24">
+              <span id="terms" className="block scroll-mt-24" />
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="glass-card p-8"
+                className="glass-card lift p-8"
               >
                 <h3 className="text-lg font-semibold text-foreground mb-4">
                   Privacy & Terms
@@ -263,9 +211,7 @@ const AboutPage = () => {
               </motion.div>
             </section>
           </div>
-        </main>
-
-        <Footer />
+        </div>
       </div>
     </>
   );
