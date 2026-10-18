@@ -13,30 +13,21 @@ platform. It presents the platform stack, documentation entry points, research
 areas, downloads, and community channels in a single responsive site built with
 Vite, React, TypeScript, Tailwind CSS, and shadcn/ui components.
 
-## Where this fits
+## What's on the site
 
-AWEN is organized as three repositories:
-
-```mermaid
-flowchart LR
-    core["<b>awen</b><br/>compiler, runtime, MLIR dialects,<br/>simulator, specifications"]
-    labs["<b>awen-labs</b> (this repo)<br/>interactive platform site<br/>React + TypeScript"]
-    status["<b>awenphotonics.github.io</b><br/>static, evidence-checked<br/>status and research site"]
-    core -- capabilities and docs --> labs
-    core -- verified status --> status
-```
-
-| Repository | Role |
+| Page | What it covers |
 |---|---|
-| [awen](https://github.com/marcpoliquin5/awen) | The technology: an experimental heterogeneous compiler and runtime for programmable photonic linear algebra (Rust, MLIR, Python) |
-| **awen-labs** | This repository: the interactive platform site (pages for Platform, Research, Docs, Downloads, Community, About) |
-| [awenphotonics.github.io](https://github.com/marcpoliquin5/awenphotonics.github.io) | A static status site whose public copy is limited to repository-verifiable statements ([live site](https://marcpoliquin5.github.io/awenphotonics.github.io/)) |
+| Platform | The software stack, from framework integration down to device control |
+| Research | Active research directions and their current status (in development, specification, planned) |
+| Docs | Entry points into the guides and specifications |
+| Downloads | Building from source; binary releases are on the roadmap |
+| Community | Issues, contributing, and release notes |
+| About | Mission and approach |
 
-> **Content status.** Some page copy in this site (for example research
-> summaries, benchmark figures, and download descriptions) is presentational and
-> has not been reconciled with AWEN's evidence policy. The authoritative statement
-> of what AWEN implements today is the core repository's
-> [implementation status](https://github.com/marcpoliquin5/awen/blob/main/docs/IMPLEMENTATION-STATUS.md).
+> **Content policy.** Vision and roadmap are presented as such. Concrete
+> statements (benchmarks, hardware results, downloads) appear only when they can
+> be backed by published, reproducible evidence; anything still in progress is
+> labeled with its status.
 
 ## Project structure
 
