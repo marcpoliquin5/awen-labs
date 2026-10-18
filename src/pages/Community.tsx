@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Github, MessageCircle, Mail, Users, Heart, BookOpen, Code, GitPullRequest } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -53,8 +52,9 @@ const CommunityPage = () => {
                 Join the <span className="text-primary">Community</span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                AWEN is built by a global community of researchers, engineers, and 
-                developers passionate about the future of computing.
+                AWEN is being built for researchers, engineers, and developers
+                passionate about the future of computing. Community channels open
+                with the first release.
               </p>
             </motion.div>
 
@@ -63,39 +63,30 @@ const CommunityPage = () => {
               {[
                 {
                   icon: Github,
-                  title: "GitHub",
+                  title: "Open Source",
                   description:
-                    "Browse the source code, report issues, and submit pull requests.",
-                  href: "https://github.com/marcpoliquin5/awen",
-                  action: "View Repository",
-                  stats: "2.4k stars",
+                    "Source code will be published alongside the first release.",
+                  action: "Coming soon",
                 },
                 {
                   icon: MessageCircle,
                   title: "Issues & Discussion",
                   description:
-                    "Ask questions, propose ideas, and report bugs on GitHub Issues.",
-                  href: "https://github.com/marcpoliquin5/awen/issues",
-                  action: "Open Issues",
-                  stats: "1.2k members",
+                    "A public place to ask questions, propose ideas, and report bugs.",
+                  action: "Coming soon",
                 },
                 {
                   icon: Mail,
-                  title: "Newsletter",
+                  title: "Release Updates",
                   description:
-                    "Watch the repository on GitHub to be notified of releases.",
-                  href: "https://github.com/marcpoliquin5/awen/releases",
-                  action: "Watch Releases",
-                  stats: "5k subscribers",
+                    "Get notified when the first release ships.",
+                  action: "Coming soon",
                 },
               ].map((link, index) => {
                 const Icon = link.icon;
                 return (
-                  <motion.a
+                  <motion.div
                     key={link.title}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
@@ -110,13 +101,10 @@ const CommunityPage = () => {
                     <p className="text-muted-foreground text-sm mb-4">
                       {link.description}
                     </p>
-                    <p className="text-xs text-muted-foreground mb-4">
-                      {link.stats}
-                    </p>
                     <span className="text-primary font-medium">
-                      {link.action} →
+                      {link.action}
                     </span>
-                  </motion.a>
+                  </motion.div>
                 );
               })}
             </div>
@@ -195,26 +183,12 @@ const CommunityPage = () => {
               <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
                 We're actively seeking researchers with photonics expertise, 
                 hardware engineers interested in PIC integration, and developers 
-                who want to push the boundaries of computing. Funded positions 
-                and research partnerships available.
+                who want to push the boundaries of computing.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://github.com/marcpoliquin5/awen/issues" target="_blank" rel="noopener noreferrer">
-                  <Button variant="glow" size="lg">
-                    <Mail className="mr-2 w-5 h-5" />
-                    Contact for Collaboration
-                  </Button>
-                </a>
-                <a
-                  href="https://github.com/marcpoliquin5/awen/blob/main/CONTRIBUTING.md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button variant="outline" size="lg">
-                    Read Contribution Guide
-                  </Button>
-                </a>
-              </div>
+              <span className="inline-flex items-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-5 py-2.5 text-sm font-medium text-primary">
+                <Mail className="w-4 h-4" />
+                Contact channels coming soon
+              </span>
             </motion.div>
           </div>
         </main>

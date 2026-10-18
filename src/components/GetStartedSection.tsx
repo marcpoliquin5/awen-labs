@@ -1,18 +1,17 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Download, Github, Terminal, ArrowRight } from "lucide-react";
+import { Download, Terminal, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const GetStartedSection = () => {
-  const codeSnippet = `# Get the source
-git clone https://github.com/marcpoliquin5/awen.git
-cd awen
-
-# Build and test the compiler
-cargo test --manifest-path awen-compiler/Cargo.toml
-
-# Use AWEN as a torch.compile backend
-pip install -e "awen-ecosystem/python_awen[frameworks]"`;
+  const codeSnippet = `# AWEN: first public release (in preparation)
+#
+# • awenctl command-line compiler and runtime
+# • Photonic simulator with calibrated noise models
+# • PyTorch, JAX, and NumPy integrations
+# • Signed builds for macOS, Linux, and Windows
+#
+# Status: download coming soon`;
 
   return (
     <section className="py-24 relative">
@@ -28,7 +27,7 @@ pip install -e "awen-ecosystem/python_awen[frameworks]"`;
             Get <span className="text-primary">Started</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Open source and buildable today. No account required.
+            The first public release is in preparation. Download coming soon.
           </p>
         </motion.div>
 
@@ -47,37 +46,32 @@ pip install -e "awen-ecosystem/python_awen[frameworks]"`;
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-foreground">
-                  AWEN from source
+                  AWEN
                 </h3>
                 <p className="text-muted-foreground text-sm">
-                  Experimental • MIT licensed
+                  Coming soon
                 </p>
               </div>
             </div>
 
             <p className="text-muted-foreground mb-6">
-              Compiler, runtime, simulator, and the awenctl CLI, built from source
-              with Rust and Python. Prebuilt releases are on the roadmap.
+              Compiler, runtime, simulator, and the awenctl CLI, packaged as
+              prebuilt releases. Downloads open with the first release.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Link to="/downloads" className="flex-1">
                 <Button variant="glow" size="lg" className="w-full">
                   <Download className="mr-2 w-5 h-5" />
-                  Get AWEN
+                  Download coming soon
                 </Button>
               </Link>
-              <a
-                href="https://github.com/marcpoliquin5/awen"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1"
-              >
+              <Link to="/platform#roadmap" className="flex-1">
                 <Button variant="outline" size="lg" className="w-full">
-                  <Github className="mr-2 w-5 h-5" />
-                  View on GitHub
+                  <ArrowRight className="mr-2 w-5 h-5" />
+                  View Roadmap
                 </Button>
-              </a>
+              </Link>
             </div>
           </motion.div>
 
@@ -92,7 +86,7 @@ pip install -e "awen-ecosystem/python_awen[frameworks]"`;
             <div className="flex items-center gap-2 px-4 py-3 bg-secondary/50 border-b border-border/50">
               <Terminal className="w-4 h-4 text-muted-foreground" />
               <span className="text-sm text-muted-foreground font-mono">
-                Quickstart
+                Release preview
               </span>
               <div className="ml-auto flex gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-red-500/50" />

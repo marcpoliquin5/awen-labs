@@ -252,20 +252,12 @@ const AboutPage = () => {
                   Privacy & Terms
                 </h3>
                 <p className="text-muted-foreground mb-4">
-                  AWEN is committed to your privacy. We collect minimal data—only 
-                  what's necessary to improve the platform. All our software is 
-                  open source under the MIT License.
+                  This site has no accounts, no forms, and does not collect personal
+                  data. AWEN software will be released under the MIT License.
                 </p>
                 <p className="text-muted-foreground">
-                  Questions about privacy, licensing, or terms? Open an issue on{" "}
-                  <a
-                    href="https://github.com/marcpoliquin5/awen/issues"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:text-accent transition-colors"
-                  >
-                    GitHub
-                  </a>
+                  A contact channel for questions about privacy, licensing, or terms
+                  is coming soon.
                 </p>
               </motion.div>
             </section>

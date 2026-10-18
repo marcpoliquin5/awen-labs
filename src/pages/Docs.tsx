@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Book, Code, Rocket, ChevronRight, Search, ArrowRight } from "lucide-react";
+import { Book, Code, Rocket, Search, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,9 +14,9 @@ const docsSections = [
     icon: Rocket,
     description: "New to AWEN? Begin with these guides.",
     articles: [
-      { title: "Quick Start Guide", href: "https://github.com/marcpoliquin5/awen/blob/main/README.md#quickstart", time: "5 min" },
-      { title: "Installation", href: "https://github.com/marcpoliquin5/awen/blob/main/README.md#build-and-verify", time: "3 min" },
-      { title: "Your First Simulation", href: "https://github.com/marcpoliquin5/awen/blob/main/README.md#execute-the-calibrated-reference-benchmark", time: "10 min" },
+      { title: "Quick Start Guide" },
+      { title: "Installation" },
+      { title: "Your First Simulation" },
     ],
   },
   {
@@ -25,10 +25,10 @@ const docsSections = [
     icon: Book,
     description: "Learn the fundamentals of the AWEN platform.",
     articles: [
-      { title: "Platform Architecture", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/specs/computation-model.md", time: "8 min" },
-      { title: "Kernels & Operations", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/specs/kernel-semantics.md", time: "12 min" },
-      { title: "Memory Model", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/specs/memory-state.md", time: "10 min" },
-      { title: "Simulation Engine", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/specs/engine.md", time: "15 min" },
+      { title: "Platform Architecture" },
+      { title: "Kernels & Operations" },
+      { title: "Memory Model" },
+      { title: "Simulation Engine" },
     ],
   },
   {
@@ -37,10 +37,10 @@ const docsSections = [
     icon: Code,
     description: "Deep dives for experienced developers.",
     articles: [
-      { title: "Custom Kernel Development", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0015-awenblas-kernel-library.md", time: "20 min" },
-      { title: "Hardware Targets", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/specs/hal.md", time: "15 min" },
-      { title: "Performance Optimization", href: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0013-full-system-cost-model.md", time: "18 min" },
-      { title: "Contributing to AWEN", href: "https://github.com/marcpoliquin5/awen/blob/main/CONTRIBUTING.md", time: "10 min" },
+      { title: "Custom Kernel Development" },
+      { title: "Hardware Targets" },
+      { title: "Performance Optimization" },
+      { title: "Contributing to AWEN" },
     ],
   },
 ];
@@ -74,8 +74,8 @@ const DocsPage = () => {
                 <span className="text-primary">Documentation</span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
-                Everything you need to build with AWEN. From quick start guides to 
-                advanced tutorials.
+                Everything you'll need to build with AWEN, from quick start guides to
+                advanced tutorials. Full documentation arrives with the first release.
               </p>
 
               {/* Search */}
@@ -107,13 +107,13 @@ const DocsPage = () => {
                 <div>
                   <h3 className="font-semibold text-foreground">New to AWEN?</h3>
                   <p className="text-muted-foreground text-sm">
-                    Start with the quickstart: build AWEN from source
+                    Guides and API reference are being written for the first release
                   </p>
                 </div>
               </div>
               <Link to="/downloads">
                 <Button variant="glow">
-                  Get Started
+                  Download coming soon
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
@@ -147,22 +147,14 @@ const DocsPage = () => {
                     <ul className="space-y-2">
                       {section.articles.map((article) => (
                         <li key={article.title}>
-                          <a
-                            href={article.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-between p-3 rounded-lg hover:bg-secondary/50 transition-colors group"
-                          >
+                          <div className="flex items-center justify-between p-3 rounded-lg hover:bg-secondary/50 transition-colors group">
                             <span className="text-foreground group-hover:text-primary transition-colors">
                               {article.title}
                             </span>
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs text-muted-foreground">
-                                {article.time}
-                              </span>
-                              <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                            </div>
-                          </a>
+                            <span className="text-xs text-muted-foreground whitespace-nowrap ml-3">
+                              Coming soon
+                            </span>
+                          </div>
                         </li>
                       ))}
                     </ul>
@@ -180,8 +172,11 @@ const DocsPage = () => {
               className="max-w-4xl mx-auto mt-24"
             >
               <h2 className="text-2xl font-bold text-center mb-8">
-                Copy-Paste <span className="text-primary">Ready</span>
+                API <span className="text-primary">Preview</span>
               </h2>
+              <p className="text-muted-foreground text-sm text-center -mt-4 mb-8">
+                Illustrative only. The public API will be documented with the first release.
+              </p>
               <div className="glass-card overflow-hidden">
                 <div className="flex items-center gap-2 px-4 py-3 bg-secondary/50 border-b border-border/50">
                   <Code className="w-4 h-4 text-muted-foreground" />

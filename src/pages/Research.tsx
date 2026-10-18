@@ -15,7 +15,6 @@ const allResearch: ResearchItem[] = [
     tags: ["benchmarks", "GEMM", "hardware-in-the-loop"],
     status: "In Development",
     date: "AEP-0019",
-    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0019-hardware-in-the-loop-benchmarking.md",
   },
   {
     id: "2",
@@ -25,7 +24,6 @@ const allResearch: ResearchItem[] = [
     tags: ["calibration", "compiler", "fault-tolerance"],
     status: "Specification",
     date: "AEP-0018",
-    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0018-calibration-aware-compilation.md",
   },
   {
     id: "3",
@@ -35,7 +33,6 @@ const allResearch: ResearchItem[] = [
     tags: ["ML", "inference", "neural-nets"],
     status: "In Development",
     date: "AEP-0016",
-    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0016-framework-integration.md",
   },
   {
     id: "4",
@@ -45,7 +42,6 @@ const allResearch: ResearchItem[] = [
     tags: ["precision", "analog", "error-contracts"],
     status: "Specification",
     date: "AEP-0017",
-    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0017-precision-and-error-contracts.md",
   },
   {
     id: "5",
@@ -55,7 +51,6 @@ const allResearch: ResearchItem[] = [
     tags: ["kernels", "specification", "language"],
     status: "Specification",
     date: "AEP-0003",
-    link: "https://github.com/marcpoliquin5/awen/blob/main/awen-spec/aeps/AEP-0003-kernel-semantics.md",
   },
   {
     id: "6",

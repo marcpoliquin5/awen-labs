@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import AwenLogo from "./AwenLogo";
-import { Github, MessageCircle, Mail, ExternalLink } from "lucide-react";
 
 const footerLinks = {
   Platform: [
@@ -17,8 +16,6 @@ const footerLinks = {
     { label: "Brand", href: "/about#brand" },
   ],
   Community: [
-    { label: "GitHub", href: "https://github.com/marcpoliquin5/awen", external: true },
-    { label: "Issues", href: "https://github.com/marcpoliquin5/awen/issues", external: true },
     { label: "Contribute", href: "/community" },
     { label: "Contact", href: "/community#contact" },
   ],
@@ -40,36 +37,10 @@ const Footer = () => {
                 AWEN
               </span>
             </Link>
-            <p className="text-muted-foreground mb-6 max-w-sm">
+            <p className="text-muted-foreground max-w-sm">
               Light-powered computing infrastructure for the post-silicon era. 
               Open source. Open science. Open future.
             </p>
-            <div className="flex gap-4">
-              <a
-                href="https://github.com/marcpoliquin5/awen"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary transition-all"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="https://github.com/marcpoliquin5/awen/issues"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary transition-all"
-              >
-                <MessageCircle className="w-5 h-5" />
-              </a>
-              <a
-                href="https://github.com/marcpoliquin5/awen/issues"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary transition-all"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
-            </div>
           </div>
 
           {/* Link columns */}
@@ -79,24 +50,12 @@ const Footer = () => {
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.label}>
-                    {link.external ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
-                      >
-                        {link.label}
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                    ) : (
-                      <Link
-                        to={link.href}
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    )}
+                    <Link
+                      to={link.href}
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
