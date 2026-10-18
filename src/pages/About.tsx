@@ -3,16 +3,17 @@ import { Helmet } from "react-helmet-async";
 import { Sparkles, Users, Target, Palette } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AwenLogo from "@/components/AwenLogo";
+import BrandLogo from "@/components/BrandLogo";
+import { BRAND } from "@/config/brand";
 
 const AboutPage = () => {
   return (
     <>
       <Helmet>
-        <title>About | AWEN Photonics</title>
+        <title>{`About | ${BRAND.fullName}`}</title>
         <meta
           name="description"
-          content="Learn about AWEN Photonics—our mission, team, and brand. Building the future of photonic computing."
+          content={`Learn about ${BRAND.fullName}—our mission, team, and brand. Building the future of photonic computing.`}
         />
       </Helmet>
 
@@ -28,13 +29,13 @@ const AboutPage = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-24"
             >
-              <AwenLogo className="w-24 h-24 mx-auto mb-8" />
+              <BrandLogo size={96} className="mx-auto mb-8" />
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-                About <span className="text-primary">AWEN</span>
+                About <span className="text-primary">{BRAND.name}</span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Named for the Celtic concept of creative inspiration and flowing 
-                energy—AWEN represents our vision of computation powered by the 
+                energy—{BRAND.name} represents our vision of computation powered by the 
                 fundamental nature of light.
               </p>
             </motion.div>
@@ -152,11 +153,11 @@ const AboutPage = () => {
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                     {[
-                      { name: "Midnight", color: "bg-background", hex: "#040712" },
-                      { name: "Abyss", color: "bg-card", hex: "#070c17" },
-                      { name: "Electric Blue", color: "bg-primary", hex: "#3B82F6" },
-                      { name: "Cyan", color: "bg-accent", hex: "#22D3EE" },
-                      { name: "Soft White", color: "bg-foreground", hex: "#E5E7EB" },
+                      { name: "Obsidian", color: "bg-background", hex: "#090807" },
+                      { name: "Graphite", color: "bg-card", hex: "#0E0D0B" },
+                      { name: "Gold", color: "bg-primary", hex: "#E1B137" },
+                      { name: "Photon Blue", color: "bg-accent", hex: "#3F9FF3" },
+                      { name: "Ivory", color: "bg-foreground", hex: "#F6F4EE" },
                     ].map((c) => (
                       <div key={c.name} className="text-center">
                         <div
@@ -253,7 +254,7 @@ const AboutPage = () => {
                 </h3>
                 <p className="text-muted-foreground mb-4">
                   This site has no accounts, no forms, and does not collect personal
-                  data. AWEN software will be released under the MIT License.
+                  data. {BRAND.name} software will be released under the MIT License.
                 </p>
                 <p className="text-muted-foreground">
                   A contact channel for questions about privacy, licensing, or terms

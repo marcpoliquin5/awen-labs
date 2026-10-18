@@ -1,27 +1,24 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { MotionConfig } from "framer-motion";
 import Index from "./pages/Index";
-import Downloads from "./pages/Downloads";
-import Research from "./pages/Research";
-import Platform from "./pages/Platform";
-import Docs from "./pages/Docs";
-import Community from "./pages/Community";
-import About from "./pages/About";
-import NotFound from "./pages/NotFound";
+import SmoothScroll from "./components/SmoothScroll";
 
-const queryClient = new QueryClient();
+const Downloads = lazy(() => import("./pages/Downloads"));
+const Research = lazy(() => import("./pages/Research"));
+const Platform = lazy(() => import("./pages/Platform"));
+const Docs = lazy(() => import("./pages/Docs"));
+const Community = lazy(() => import("./pages/Community"));
+const About = lazy(() => import("./pages/About"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const App = () => (
   <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+    <MotionConfig reducedMotion="user">
+      <SmoothScroll />
+      <BrowserRouter>
+        <Suspense fallback={<div className="min-h-screen bg-background" />}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/downloads" element={<Downloads />} />
@@ -32,9 +29,9 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+        </Suspense>
+      </BrowserRouter>
+    </MotionConfig>
   </HelmetProvider>
 );
 

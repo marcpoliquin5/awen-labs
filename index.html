@@ -3,25 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AWEN Photonics | Light-Powered Computing Infrastructure</title>
+    <title>%BRAND_FULL_NAME% | %BRAND_TAGLINE%</title>
     <meta
       name="description"
-      content="AWEN is an open-source platform for photonic computing: a compiler, runtime, kernels, and developer tools designed to make light a first-class target for AI workloads."
+      content="%BRAND_NAME% is building a complete software platform for photonic computing, from an instruction set for light to a CUDA-like programming model for AI kernels."
     />
-    <meta name="author" content="AWEN" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="author" content="%BRAND_FULL_NAME%" />
+    <meta name="theme-color" content="#090807" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" as="image" type="image/webp" href="/brand/logo-64.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
 
-    <meta property="og:title" content="AWEN Photonics | Light-Powered Computing Infrastructure" />
+    <meta property="og:title" content="%BRAND_FULL_NAME% | %BRAND_TAGLINE%" />
     <meta
       property="og:description"
-      content="An open-source platform for photonic computing: compiler, runtime, kernels, and developer tools."
+      content="A software platform for photonic computing, from an instruction set for light to a CUDA-like programming model for AI kernels."
     />
     <meta property="og:type" content="website" />
-
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="/brand/mascot-1100.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
 
-  <body>
+  <body style="background:#090807">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

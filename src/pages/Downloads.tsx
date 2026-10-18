@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Download, ArrowRight, FileText, Clock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { BRAND } from "@/config/brand";
 
 const plannedReleases = [
   "Prebuilt awenctl binaries for macOS, Linux, and Windows (WSL)",
@@ -15,10 +16,10 @@ const DownloadsPage = () => {
   return (
     <>
       <Helmet>
-        <title>Downloads | AWEN Photonics</title>
+        <title>{`Downloads | ${BRAND.fullName}`}</title>
         <meta
           name="description"
-          content="AWEN downloads are coming soon: prebuilt, signed releases of the photonic compiler and runtime."
+          content={`${BRAND.name} downloads are coming soon: prebuilt, signed releases of the photonic compiler and runtime.`}
         />
       </Helmet>
 
@@ -35,10 +36,10 @@ const DownloadsPage = () => {
               className="text-center mb-16"
             >
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-                Get <span className="text-primary">AWEN</span>
+                Get <span className="text-primary">{BRAND.name}</span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Download coming soon. AWEN is in active development, and the first
+                Download coming soon. {BRAND.name} is in active development, and the first
                 public release is being prepared.
               </p>
             </motion.div>
@@ -56,7 +57,7 @@ const DownloadsPage = () => {
                     <Download className="w-8 h-8 text-primary" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-foreground">AWEN</h2>
+                    <h2 className="text-2xl font-bold text-foreground">{BRAND.name}</h2>
                     <p className="text-muted-foreground">
                       Photonic compiler and runtime • Rust, MLIR, and Python
                     </p>
@@ -103,7 +104,7 @@ const DownloadsPage = () => {
               </div>
               <div className="glass-card p-6">
                 <p className="text-muted-foreground">
-                  AWEN has not published a release yet. Release notes will appear here
+                  {BRAND.name} has not published a release yet. Release notes will appear here
                   alongside the first download.
                 </p>
               </div>

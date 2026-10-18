@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap')
-layer(base);
-
 @import 'tailwindcss';
 
 @plugin 'tailwindcss-animate';
@@ -210,7 +207,7 @@ layer(base);
 
 @utility text-glow {
   /* Text glow */
-  text-shadow: 0 0 40px hsl(217 91% 60% / 0.5);
+  text-shadow: 0 0 40px hsl(43 74% 55% / 0.5);
 }
 
 @utility nebula-bg {
@@ -223,12 +220,12 @@ layer(base);
     background:
       radial-gradient(
         ellipse 60% 40% at 20% 30%,
-        hsl(217 91% 60% / 0.05) 0%,
+        hsl(43 74% 55% / 0.05) 0%,
         transparent 70%
       ),
       radial-gradient(
         ellipse 50% 50% at 80% 60%,
-        hsl(187 94% 48% / 0.03) 0%,
+        hsl(208 88% 60% / 0.03) 0%,
         transparent 70%
       );
   }
@@ -236,66 +233,66 @@ layer(base);
 
 @layer base {
   :root {
-    /* AWEN Color System - Deep Space + Photonic Energy */
-    --background: 222 47% 3%;
-    --foreground: 210 40% 96%;
+    /* AWEN color system: deep black, metallic gold, photonic blue */
+    --background: 40 12% 3%;
+    --foreground: 45 30% 95%;
 
-    --card: 222 47% 5%;
-    --card-foreground: 210 40% 96%;
+    --card: 40 10% 5%;
+    --card-foreground: 45 30% 95%;
 
-    --popover: 222 47% 5%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 40 10% 5%;
+    --popover-foreground: 45 30% 95%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 3%;
+    --primary: 43 74% 55%;
+    --primary-foreground: 35 40% 6%;
 
-    --secondary: 217 33% 12%;
-    --secondary-foreground: 210 40% 96%;
+    --secondary: 40 10% 11%;
+    --secondary-foreground: 45 30% 95%;
 
-    --muted: 217 33% 10%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 40 8% 10%;
+    --muted-foreground: 40 8% 62%;
 
-    --accent: 187 94% 48%;
-    --accent-foreground: 222 47% 3%;
+    --accent: 208 88% 60%;
+    --accent-foreground: 215 40% 6%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 15%;
-    --input: 217 33% 15%;
-    --ring: 217 91% 60%;
+    --border: 40 12% 15%;
+    --input: 40 12% 15%;
+    --ring: 43 74% 55%;
 
     --radius: 0.75rem;
 
     /* AWEN Custom Tokens */
-    --awen-midnight: 222 47% 3%;
-    --awen-abyss: 222 47% 5%;
-    --awen-electric: 217 91% 60%;
-    --awen-cyan: 187 94% 48%;
-    --awen-glow: 217 91% 70%;
-    --awen-nebula: 240 50% 8%;
+    --awen-midnight: 40 12% 3%;
+    --awen-abyss: 40 10% 5%;
+    --awen-electric: 43 74% 55%;
+    --awen-cyan: 208 88% 60%;
+    --awen-glow: 45 85% 66%;
+    --awen-nebula: 35 20% 7%;
 
     /* Gradients */
-    --gradient-space: linear-gradient(180deg, hsl(222 47% 3%) 0%, hsl(240 50% 6%) 50%, hsl(222 47% 5%) 100%);
-    --gradient-glow: linear-gradient(135deg, hsl(217 91% 60% / 0.3) 0%, hsl(187 94% 48% / 0.1) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(217 33% 12% / 0.5) 0%, hsl(217 33% 8% / 0.3) 100%);
-    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(217 91% 60% / 0.15) 0%, transparent 70%);
+    --gradient-space: linear-gradient(180deg, hsl(40 12% 3%) 0%, hsl(35 20% 6%) 50%, hsl(40 10% 5%) 100%);
+    --gradient-glow: linear-gradient(135deg, hsl(43 74% 55% / 0.3) 0%, hsl(208 88% 60% / 0.1) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(40 10% 11% / 0.5) 0%, hsl(40 10% 8% / 0.3) 100%);
+    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(43 74% 55% / 0.15) 0%, transparent 70%);
 
     /* Shadows */
-    --shadow-glow: 0 0 60px hsl(217 91% 60% / 0.3);
-    --shadow-glow-sm: 0 0 20px hsl(217 91% 60% / 0.2);
-    --shadow-glow-cyan: 0 0 40px hsl(187 94% 48% / 0.2);
-    --shadow-card: 0 4px 24px hsl(222 47% 3% / 0.8);
+    --shadow-glow: 0 0 60px hsl(43 74% 55% / 0.3);
+    --shadow-glow-sm: 0 0 20px hsl(43 74% 55% / 0.2);
+    --shadow-glow-cyan: 0 0 40px hsl(208 88% 60% / 0.2);
+    --shadow-card: 0 4px 24px hsl(40 12% 2% / 0.8);
 
     /* Sidebar (keeping for shadcn compatibility) */
-    --sidebar-background: 222 47% 4%;
-    --sidebar-foreground: 210 40% 96%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 222 47% 3%;
-    --sidebar-accent: 217 33% 12%;
-    --sidebar-accent-foreground: 210 40% 96%;
-    --sidebar-border: 217 33% 15%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-background: 40 12% 4%;
+    --sidebar-foreground: 45 30% 95%;
+    --sidebar-primary: 43 74% 55%;
+    --sidebar-primary-foreground: 35 40% 6%;
+    --sidebar-accent: 40 10% 11%;
+    --sidebar-accent-foreground: 45 30% 95%;
+    --sidebar-border: 40 12% 15%;
+    --sidebar-ring: 43 74% 55%;
   }
 }
 
@@ -373,5 +370,42 @@ layer(base);
   }
   100% {
     transform: translateX(0) translateY(0);
+  }
+}
+
+/* Landing page */
+html {
+  scroll-behavior: smooth;
+}
+@keyframes hero-enter {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-enter {
+  animation: hero-enter 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* Staggered headline reveal: each word rises out of a clipped line. */
+@keyframes word-reveal {
+  from { opacity: 0; transform: translateY(0.45em); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+.word-reveal {
+  display: inline-block;
+  animation: word-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* Metallic gold text, echoing the brand mascot. */
+.text-gold-metal {
+  background: linear-gradient(100deg, hsl(42 60% 38%) 0%, hsl(45 90% 70%) 28%, hsl(48 100% 88%) 42%, hsl(43 74% 55%) 58%, hsl(38 65% 40%) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-enter, .word-reveal { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
