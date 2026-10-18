@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect } from "react";
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { useLenis } from "lenis/react";
@@ -26,9 +26,17 @@ const basename = import.meta.env.BASE_URL.replace(/\/$/, "") || "/";
 function AnimatedRoutes() {
   const location = useLocation();
   const lenis = useLenis();
+  const navigate = useNavigate();
+
+  // Static hosts redirect /route to /route/; keep one canonical form.
+  useEffect(() => {
+    if (location.pathname.length > 1 && location.pathname.endsWith("/")) {
+      navigate({ ...location, pathname: location.pathname.replace(/\/+$/, "") }, { replace: true });
+    }
+  }, [location, navigate]);
 
   useEffect(() => {
-    sceneStore.setRoute(location.pathname);
+    sceneStore.setRoute(location.pathname.replace(/(.)\/+$/, "$1"));
   }, [location.pathname]);
 
   const toTop = () => {

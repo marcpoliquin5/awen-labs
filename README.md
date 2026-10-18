@@ -163,8 +163,9 @@ Every push to `main` builds the site and publishes it with GitHub Pages
 - the project URL, `https://marcpoliquin5.github.io/awen-labs/` (base `/awen-labs/`), or
 - a custom domain at the root (base `/`).
 
-`dist/404.html` is a copy of `index.html`, so deep links such as `/architecture`
-load directly.
+The build writes `index.html` into each route folder (so `/architecture` returns
+HTTP 200) plus `404.html` as a fallback for any other path. When adding a route,
+add it to `ROUTES` in `vite.config.ts`.
 
 ### Switching to the custom domain
 
