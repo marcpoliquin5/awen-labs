@@ -4,6 +4,32 @@ Report a suspected privileged credential through GitHub's private vulnerability
 reporting channel when available. Do not open a public issue containing the
 credential.
 
+## Configuration rules
+
+Every `VITE_` value is embedded in the browser bundle. Never place a service-role
+key, database password, JWT signing secret, management access token, or other
+privileged value in a `VITE_` variable, a file intended for commit, a GitHub
+variable, a build log, or an artifact.
+
+The Supabase browser key identifies a project; it does not authorize trusted
+operations. Database authorization must be enforced with Row Level Security and
+explicit anonymous and authenticated policies. The application currently makes
+no database, authentication, storage, or RPC calls. If a public table is added,
+`npm run check:security` requires versioned migrations that enable RLS and create
+explicit policies before CI can pass.
+
+Supabase configuration, when it is needed, goes in `.env.local`:
+
+- `VITE_SUPABASE_PROJECT_ID`: `rzgqmmjvjmsfyetgzjvi`
+- `VITE_SUPABASE_URL`: `https://rzgqmmjvjmsfyetgzjvi.supabase.co`
+- `VITE_SUPABASE_PUBLISHABLE_KEY`: an active `sb_publishable_` key from that project
+
+## Automated checks
+
+Pull requests and `main` run a complete-history Gitleaks scan, the repository
+security policy check, `npm audit`, ESLint, and a production build using
+non-secret CI fixtures.
+
 ## Configuration audit
 
 - The only credential-like value found across all Git history was the legacy
